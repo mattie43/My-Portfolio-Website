@@ -3,12 +3,12 @@ import styled from "styled-components";
 import { HamburgerCollapse } from "react-animated-burgers";
 import { Link } from "react-router-dom";
 
-function MobileHeader(props) {
+function MobileHeader() {
   const [navBarOpen, setNavBarOpen] = useState(false);
 
   return (
     <>
-      <Container style={{ height: navBarOpen ? "250px" : "0" }}>
+      <Container style={{ height: navBarOpen ? "220px" : "0" }}>
         <HamburgerCollapse
           isActive={navBarOpen}
           barColor="white"
@@ -19,18 +19,18 @@ function MobileHeader(props) {
           }}
         />
         <NavContainer>
-          <Link to="/">
+          <Link to="/" onClick={() => setNavBarOpen(false)}>
             <p>HOME</p>
           </Link>
-          <Link to="/">
+          <Link to="/" onClick={() => setNavBarOpen(false)}>
             <p>RESUME</p>
           </Link>
-          <Link to="/projects">
+          <Link to="/projects" onClick={() => setNavBarOpen(false)}>
             <p>PROJECTS</p>
           </Link>
         </NavContainer>
       </Container>
-      <span style={{ margin: "30px" }} />
+      <span style={{ margin: "32px" }} />
     </>
   );
 }
@@ -43,11 +43,11 @@ const Container = styled.div`
   transition: 0.5s;
   background-color: #3277a8;
   position: fixed;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
   & a {
     color: white;
     text-decoration: none;
   }
-  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
 `;
 
 const NavContainer = styled.div`

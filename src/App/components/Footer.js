@@ -7,7 +7,7 @@ import {
   FaMedium,
 } from "react-icons/fa";
 
-function Footer(props) {
+function Footer() {
   const iconSize = 50;
   return (
     <Container>
