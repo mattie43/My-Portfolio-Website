@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { FaGithub } from "react-icons/fa";
+
+import * as PL from "./ProjectList";
 
 function Projects() {
+  window.addEventListener("scroll", (e) => {});
+
   return (
     <Container>
       <Text>
@@ -10,27 +13,40 @@ function Projects() {
         <a href="https://flatironschool.com/" target="_blank" rel="noreferrer">
           Flatiron School
         </a>
-        , I have created five apps using Ruby, Javascript, React, and React
-        Native. Four of those apps were done with a partner, with the final app
-        being a solo project.
+        , I have created five apps using Ruby, Rails, Javascript, React, and
+        React Native. Four of those apps were done with a partner, with the
+        final app being a solo project. I've also created a web automation bot
+        in Python that my brother uses to create tee times for the weekends.
+        Demo video and Github links are on the bottom of each description.
       </Text>
-      <Text>
-        My first project I have ever created was a CLI app written in Ruby. It
-        was made with{" "}
-        <a href="https://github.com/alerner1" target="_blank" rel="noreferrer">
-          Alyssa Lerner
-        </a>
-        . This app allows you to search Giphy through the Giphy API and save
-        gifs in the categories of your choosing. Categories and gifs are saved
-        to your account, so you can always go back and view them again. <br />
-        <a
-          href="https://github.com/mattie43/Mod1-FinalProject-GiFinder"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FaGithub size={40} />
-        </a>
-      </Text>
+      <CardContainer>
+        <iframe
+          width="2300"
+          height="500"
+          src="https://www.youtube.com/embed/mzcHALqESIw?list=PL9qahmMHuxzSpTHbPNJfLlLN1HpzKNH2A"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          style={{
+            paddingTop: "20px",
+            paddingBottom: "20px",
+            marginRight: "50px",
+          }}
+        />
+        <PL.GiFinder />
+      </CardContainer>
+      <CardContainer>
+        <PL.Whoop />
+      </CardContainer>
+      <CardContainer>
+        <PL.Pokeiron />
+      </CardContainer>
+      <CardContainer>
+        <PL.Viaggiamo />
+      </CardContainer>
+      <CardContainer>
+        <PL.Sellular />
+      </CardContainer>
     </Container>
   );
 }
@@ -46,9 +62,15 @@ const Container = styled.div`
 const Text = styled.p`
   align-self: center;
   text-align: center;
-  font-size: 20px;
+  font-size: 25px;
   width: 85%;
+  margin-top: 0;
   & a {
     color: white;
   }
+`;
+
+const CardContainer = styled.div`
+  display: flex;
+  margin: 50px;
 `;
