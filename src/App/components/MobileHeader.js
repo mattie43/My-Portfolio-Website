@@ -20,13 +20,13 @@ function MobileHeader() {
         />
         <NavContainer>
           <Link to="/" onClick={() => setNavBarOpen(false)}>
-            <p>HOME</p>
+            <h1>HOME</h1>
           </Link>
-          <Link to="/" onClick={() => setNavBarOpen(false)}>
-            <p>RESUME</p>
+          <Link to="/resume" onClick={() => setNavBarOpen(false)}>
+            <h1>RESUME</h1>
           </Link>
           <Link to="/projects" onClick={() => setNavBarOpen(false)}>
-            <p>PROJECTS</p>
+            <h1>PROJECTS</h1>
           </Link>
         </NavContainer>
       </Container>
@@ -44,6 +44,7 @@ const Container = styled.div`
   background-color: #3277a8;
   position: fixed;
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+  z-index: 1;
   & a {
     color: white;
     text-decoration: none;
@@ -56,11 +57,9 @@ const NavContainer = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-end;
-  margin-right: 20px;
+  margin-right: 30px;
   overflow-y: hidden;
-  & p {
-    font-size: 30px;
+  & h1 {
     margin: 0;
-    font-weight: bold;
   }
 `;

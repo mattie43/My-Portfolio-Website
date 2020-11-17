@@ -7,10 +7,10 @@ import {
   FaMedium,
 } from "react-icons/fa";
 
-function Footer() {
+function Footer(props) {
   const iconSize = 50;
   return (
-    <Container>
+    <Container style={{ width: props.mobile ? "100vw" : "60vw" }}>
       <a href="https://github.com/mattie43" target="_blank" rel="noreferrer">
         <FaGithubSquare size={iconSize} />
       </a>
@@ -43,9 +43,10 @@ export default Footer;
 
 const Container = styled.div`
   display: flex;
+  align-self: center;
   justify-content: space-around;
-  width: 100vw;
-  margin-top: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   & a {
     color: white;
   }
