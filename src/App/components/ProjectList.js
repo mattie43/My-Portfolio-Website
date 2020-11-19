@@ -12,7 +12,8 @@ export function GiFinder() {
       </a>
       . This app allows you to search Giphy through the Giphy API and save gifs
       in the categories of your choosing. Categories and gifs are saved to your
-      account, so you can always go back and view them again. <br />
+      account, so you can always go back and view them again.
+      <br />
       <br />
       <FaYoutube size={50} style={{ marginRight: "30px" }} />
       <a
@@ -32,7 +33,8 @@ export function Whoop() {
       My second project was my first website written in Ruby, using the Ruby on
       Rails framework. It was another partner project created with Tim Butler.
       We decided to remake Yelp. Allowing users to search, rate, and comment on
-      restaurants using the Yelp API. <br />
+      restaurants using the Yelp API.
+      <br />
       <br />
       <FaYoutube size={50} style={{ marginRight: "30px" }} />
       <a
@@ -167,6 +169,6 @@ const Text = styled.p`
   margin-left: auto;
   margin-right: auto;
   & a {
-    color: white;
+    color: inherit;
   }
 `;
