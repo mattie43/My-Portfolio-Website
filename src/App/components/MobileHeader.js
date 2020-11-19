@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { HamburgerCollapse } from "react-animated-burgers";
 import { Link } from "react-router-dom";
+import { FaMoon, FaSun } from "react-icons/fa";
 
-function MobileHeader() {
+function MobileHeader(props) {
   const [navBarOpen, setNavBarOpen] = useState(false);
 
   return (
     <>
+      <ModeContainer darkMode={props.darkMode} onClick={props.changeDarkMode}>
+        <FaMoon id="moon" size={32} />
+        <FaSun id="sun" size={32} />
+      </ModeContainer>
       <Container style={{ height: navBarOpen ? "220px" : "0" }}>
         <HamburgerCollapse
           isActive={navBarOpen}
-          barColor="white"
+          barColor={props.darkMode ? "white" : "black"}
           onClick={() => setNavBarOpen(!navBarOpen)}
           style={{
             position: "fixed",
@@ -20,7 +25,7 @@ function MobileHeader() {
         />
         <NavContainer>
           <Link to="/" onClick={() => setNavBarOpen(false)}>
-            <h1>HOME</h1>
+            <h1>ABOUT ME</h1>
           </Link>
           <Link to="/resume" onClick={() => setNavBarOpen(false)}>
             <h1>RESUME</h1>
@@ -40,13 +45,13 @@ export default MobileHeader;
 const Container = styled.div`
   display: flex;
   width: 100vw;
-  transition: 0.5s;
+  transition: height 0.5s;
   background-color: #3277a8;
   position: fixed;
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
   z-index: 1;
   & a {
-    color: white;
+    color: inherit;
     text-decoration: none;
   }
 `;
@@ -61,5 +66,24 @@ const NavContainer = styled.div`
   overflow-y: hidden;
   & h1 {
     margin: 0;
+  }
+`;
+
+const ModeContainer = styled.div`
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  overflow: hidden;
+  width: 32px;
+  height: 32px;
+  #sun {
+    position: absolute;
+    top: ${(props) => (props.darkMode ? "-50px" : "0px")};
+    transition: top 0.5s;
+  }
+  #moon {
+    position: absolute;
+    top: ${(props) => (props.darkMode ? "0px" : "50px")};
+    transition: top 0.5s;
   }
 `;

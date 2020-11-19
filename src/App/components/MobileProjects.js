@@ -76,7 +76,7 @@ const Text = styled.p`
   width: 85%;
   margin-top: 0;
   & a {
-    color: white;
+    color: inherit;
   }
 `;
 
