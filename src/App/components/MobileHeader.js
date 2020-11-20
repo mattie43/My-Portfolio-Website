@@ -3,20 +3,26 @@ import styled from "styled-components";
 import { HamburgerCollapse } from "react-animated-burgers";
 import { Link } from "react-router-dom";
 import { FaMoon, FaSun } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
 
 function MobileHeader(props) {
+  const darkMode = useSelector((state) => state.darkMode);
+  const dispatch = useDispatch();
   const [navBarOpen, setNavBarOpen] = useState(false);
 
   return (
     <>
-      <ModeContainer darkMode={props.darkMode} onClick={props.changeDarkMode}>
+      <ModeContainer
+        darkMode={darkMode}
+        onClick={() => dispatch({ type: "DARK_MODE" })}
+      >
         <FaMoon id="moon" size={32} />
         <FaSun id="sun" size={32} />
       </ModeContainer>
       <Container style={{ height: navBarOpen ? "220px" : "0" }}>
         <HamburgerCollapse
           isActive={navBarOpen}
-          barColor={props.darkMode ? "white" : "black"}
+          barColor={darkMode ? "white" : "black"}
           onClick={() => setNavBarOpen(!navBarOpen)}
           style={{
             position: "fixed",

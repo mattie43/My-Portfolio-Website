@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FaGithub } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 import * as PL from "../assests/ProjectList";
 
-export default function Projects(props) {
+export default function Projects() {
+  const darkMode = useSelector((state) => state.darkMode);
   const [card2, setCard2] = useState(false);
   const [card3, setCard3] = useState(false);
   const [card4, setCard4] = useState(false);
@@ -24,7 +26,7 @@ export default function Projects(props) {
 
   return (
     <Container>
-      <IntroText darkMode={props.darkMode}>
+      <IntroText darkMode={darkMode}>
         <PL.Intro />
       </IntroText>
       <CardContainer style={{ backgroundColor: "#984447" }}>
