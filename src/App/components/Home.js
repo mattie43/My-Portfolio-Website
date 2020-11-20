@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
-import { TLDR, FULL } from "../assests/Bio";
+import { TLDR } from "../assests/Bio";
 import headshot from "../images/headshot.jpg";
 
 function Home() {
@@ -17,11 +17,10 @@ export default Home;
 
 const Container = styled.div`
   display: flex;
-  margin-left: 40px;
-  margin-right: 40px;
   justify-content: space-evenly;
   align-items: center;
-  flex: 1;
+  height: 100vh;
+  margin: 0 80px;
 `;
 
 const Img = styled.img`

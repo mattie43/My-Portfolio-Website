@@ -8,7 +8,7 @@ import {
   FaEnvelopeSquare,
 } from "react-icons/fa";
 
-function Footer(props) {
+function Footer() {
   const [emailCopied, setEmailCopied] = useState(false);
   const iconSize = 50;
 
@@ -29,7 +29,7 @@ function Footer(props) {
   }
 
   return (
-    <Container style={{ width: props.mobile ? "100vw" : "60vw" }}>
+    <Container>
       <a href="https://github.com/mattie43" target="_blank" rel="noreferrer">
         <FaGithubSquare size={iconSize} />
       </a>
@@ -72,8 +72,12 @@ const Container = styled.div`
   justify-content: space-around;
   margin-top: 10px;
   margin-bottom: 10px;
+  width: 100vw;
   & a {
     color: inherit;
+  }
+  & a:hover {
+    opacity: 0.6;
   }
 `;
 
@@ -81,6 +85,9 @@ const EmailContainer = styled.div`
   position: relative;
   & :nth-child(2):hover {
     cursor: pointer;
+  }
+  & svg:hover {
+    opacity: 0.6;
   }
 `;
 
