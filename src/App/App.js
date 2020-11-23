@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import Home from "./components/Home";
+import AboutMe from "./components/AboutMe";
 import MobileHome from "./components/MobileHome";
 import Navigation from "./components/Navigation";
 import MobileHeader from "./components/MobileHeader";
@@ -43,7 +43,7 @@ function App() {
       style={{ backgroundImage: `url(${galaxy})` }}
     >
       {mobile ? <MobileHeader /> : <Navigation />}
-      {mobile ? <MobileHome /> : <Home />}
+      {mobile ? <MobileHome /> : <AboutMe />}
       {mobile ? <MobileProjects /> : <Projects />}
       {mobile ? <MobileFooter /> : <Links />}
     </Container>
@@ -54,9 +54,10 @@ export default App;
 
 const Container = styled.div`
   /* background-color: ${(props) => (props.darkMode ? "#282c34" : "white")}; */
-  color: ${(props) => (props.darkMode ? "#4ecdc4" : "black")};
+  color: #d7b377;
   transition: color 0.5s ease-out;
   min-height: 100vh;
+  max-width: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
