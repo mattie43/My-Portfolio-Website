@@ -14,14 +14,10 @@ export const Intro = () => (
 
 export const GiFinder = () => (
   <p>
-    The first project I have ever created was a CLI app written in Ruby. It was
-    a partner project created with{" "}
-    <a href="https://github.com/alerner1" target="_blank" rel="noreferrer">
-      Alyssa Lerner
-    </a>
-    . This app allows you to search Giphy through the Giphy API and save gifs in
-    the categories of your choosing. Categories and gifs are saved to your
-    account, so you can always go back and view them again.
+    The first project I have ever created was a CLI app written in Ruby. This
+    app allows you to search Giphy through the Giphy API and save gifs in the
+    categories of your choosing. Categories and gifs are saved to your account,
+    so you can always go back and view them again.
   </p>
 );
 

@@ -1,159 +1,123 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { FaGithub } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { FaGithub, FaEye, FaWifi } from "react-icons/fa";
 
 import * as PL from "../assests/ProjectList";
 
 export default function Projects() {
-  const darkMode = useSelector((state) => state.darkMode);
-  const [card2, setCard2] = useState(false);
-  const [card3, setCard3] = useState(false);
-  const [card4, setCard4] = useState(false);
-  const [card5, setCard5] = useState(false);
-
-  window.addEventListener("scroll", () => {
-    if (!card2 && window.scrollY > 490) {
-      setCard2(true);
-    } else if (!card3 && window.scrollY > 1390) {
-      setCard3(true);
-    } else if (!card4 && window.scrollY > 2090) {
-      setCard4(true);
-    } else if (!card5 && window.scrollY > 2990) {
-      setCard5(true);
-    }
-  });
-
   return (
     <Container>
-      <IntroText darkMode={darkMode}>
+      <IntroText>
         <PL.Intro />
       </IntroText>
-      <CardContainer style={{ backgroundColor: "#984447" }}>
+      <SingleCard>
         <ProjectTitle>GiFinder</ProjectTitle>
-        <iframe
-          width="7000"
-          height="600"
-          title="GiFinder"
-          src="https://www.youtube.com/embed/mzcHALqESIw?list=PL9qahmMHuxzSpTHbPNJfLlLN1HpzKNH2A"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          style={{
-            paddingTop: "20px",
-            paddingBottom: "20px",
-            marginRight: "50px",
-          }}
-        />
-        <CardPanel>
+        <HorizontalLine />
+        <ProjectContainer>
+          <LeftCard>
+            <img
+              src="https://images.idgesg.net/images/article/2019/07/chrome-screenshot-2-100801438-large.jpg"
+              alt="GiFinder Screenshot"
+              title="GiFinder"
+            />
+            <a
+              href="https://github.com/mattie43/Mod1-FinalProject-GiFinder"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaGithub size={22} />
+              <span>Source Code</span>
+            </a>
+            <div>
+              <FaEye size={22} />
+              <span>Video Demo</span>
+            </div>
+            <div>
+              <FaWifi size={22} />
+              <span>Live Demo</span>
+            </div>
+          </LeftCard>
+          <VerticalHR />
           <PL.GiFinder />
+        </ProjectContainer>
+      </SingleCard>
+      <SingleCard>
+        <PL.Whoop />
+        <a
+          href="https://github.com/mattie43/Mod2FinalProject/"
+          target="_blank"
+          rel="noreferrer"
+          style={{ alignSelf: "center" }}
+        >
+          <FaGithub size={50} />
+        </a>
+      </SingleCard>
+      <SingleCard>
+        <PL.Pokeiron />
+        <div style={{ alignSelf: "center" }}>
           <a
-            href="https://github.com/mattie43/Mod1-FinalProject-GiFinder"
+            href="https://github.com/mattie43/Mod3PokemonProject-FrontEnd/"
             target="_blank"
             rel="noreferrer"
-            style={{ alignSelf: "center" }}
           >
-            <FaGithub size={50} />
+            <FaGithub
+              size={50}
+              style={{ marginLeft: "20px", marginRight: "20px" }}
+            />
           </a>
-        </CardPanel>
-      </CardContainer>
-      <CardContainer
-        style={{ opacity: card2 ? 1 : 0, backgroundColor: "#5c95ff" }}
-      >
-        <ProjectTitle>Whoop</ProjectTitle>
-        <CardPanel>
-          <PL.Whoop />
           <a
-            href="https://github.com/mattie43/Mod2FinalProject/"
+            href="https://github.com/islommashanlo/Mod3-Pokemon-Project-Backend"
             target="_blank"
             rel="noreferrer"
-            style={{ alignSelf: "center" }}
           >
-            <FaGithub size={50} />
+            <FaGithub size={50} style={{ marginLeft: "20px" }} />
           </a>
-        </CardPanel>
-      </CardContainer>
-      <CardContainer
-        style={{ opacity: card3 ? 1 : 0, backgroundColor: "#468c98" }}
-      >
-        <ProjectTitle>Pokeiron</ProjectTitle>
-        <CardPanel>
-          <PL.Pokeiron />
-          <div style={{ alignSelf: "center" }}>
-            <a
-              href="https://github.com/mattie43/Mod3PokemonProject-FrontEnd/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FaGithub
-                size={50}
-                style={{ marginLeft: "20px", marginRight: "20px" }}
-              />
-            </a>
-            <a
-              href="https://github.com/islommashanlo/Mod3-Pokemon-Project-Backend"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FaGithub size={50} style={{ marginLeft: "20px" }} />
-            </a>
-          </div>
-        </CardPanel>
-      </CardContainer>
-      <CardContainer
-        style={{ opacity: card4 ? 1 : 0, backgroundColor: "#9c528b" }}
-      >
-        <ProjectTitle>Viaggiamo</ProjectTitle>
-        <CardPanel>
-          <PL.Viaggiamo />
-          <div style={{ alignSelf: "center" }}>
-            <a
-              href="https://github.com/slurio/slurio-viaggiamo-frontend-"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FaGithub
-                size={50}
-                style={{ marginLeft: "20px", marginRight: "20px" }}
-              />
-            </a>
-            <a
-              href="https://github.com/mattie43/Viaggiamo-Backend"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FaGithub size={50} style={{ marginLeft: "20px" }} />
-            </a>
-          </div>
-        </CardPanel>
-      </CardContainer>
-      <CardContainer
-        style={{ opacity: card5 ? 1 : 0, backgroundColor: "#9e6240" }}
-      >
-        <ProjectTitle>$ellular</ProjectTitle>
-        <CardPanel>
-          <PL.Sellular />
-          <div style={{ alignSelf: "center" }}>
-            <a
-              href="https://github.com/mattie43/Sellular-Frontend"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FaGithub
-                size={50}
-                style={{ marginLeft: "20px", marginRight: "20px" }}
-              />
-            </a>
-            <a
-              href="https://github.com/mattie43/Sellular-Backend"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FaGithub size={50} style={{ marginLeft: "20px" }} />
-            </a>
-          </div>
-        </CardPanel>
-      </CardContainer>
+        </div>
+      </SingleCard>
+      <SingleCard>
+        <PL.Viaggiamo />
+        <div style={{ alignSelf: "center" }}>
+          <a
+            href="https://github.com/slurio/slurio-viaggiamo-frontend-"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaGithub
+              size={50}
+              style={{ marginLeft: "20px", marginRight: "20px" }}
+            />
+          </a>
+          <a
+            href="https://github.com/mattie43/Viaggiamo-Backend"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaGithub size={50} style={{ marginLeft: "20px" }} />
+          </a>
+        </div>
+      </SingleCard>
+      <SingleCard>
+        <PL.Sellular />
+        <div style={{ alignSelf: "center" }}>
+          <a
+            href="https://github.com/mattie43/Sellular-Frontend"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaGithub
+              size={50}
+              style={{ marginLeft: "20px", marginRight: "20px" }}
+            />
+          </a>
+          <a
+            href="https://github.com/mattie43/Sellular-Backend"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FaGithub size={50} style={{ marginLeft: "20px" }} />
+          </a>
+        </div>
+      </SingleCard>
     </Container>
   );
 }
@@ -161,45 +125,88 @@ export default function Projects() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  width: 65%;
+  align-self: center;
+  margin-bottom: 30px;
+  align-items: center;
+  justify-content: center;
   & a {
     color: inherit;
   }
 `;
 
 const IntroText = styled.p`
-  background-color: ${(props) => (props.darkMode ? "#303640" : "#dedede")};
-  padding: 2% 10%;
-  height: 20vh;
   align-self: center;
   text-align: center;
   font-size: 25px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  margin: 0 0 20px 0;
+  background-color: #282c34;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
 `;
 
-const CardContainer = styled.div`
+const SingleCard = styled.div`
   display: flex;
-  position: relative;
-  height: 70vh;
-  margin: 30px 0;
-  padding: 30px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
-  transition: opacity 1s ease-in;
+  flex-direction: column;
   align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #282c34;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
   & p {
     font-size: 25px;
     text-align: center;
+    margin: 0;
+    max-width: 50%;
+  }
+  & :nth-child(3) {
+    display: flex;
+    margin-top: 10px;
   }
 `;
 
-const CardPanel = styled.div`
+const LeftCard = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  & img {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+  & span {
+    font-size: 20px;
+    margin-left: 10px;
+  }
+  & svg {
+    margin-bottom: -4px;
+  }
+  & a {
+    text-decoration: none;
+  }
+  & a:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const ProjectTitle = styled.h1`
-  position: absolute;
-  top: 0;
-  margin-top: 5px;
-  left: 45%;
+  margin: 0;
+`;
+
+const ProjectContainer = styled.div`
+  display: flex;
+`;
+
+const HorizontalLine = styled.hr`
+  width: 90%;
+  height: 1px;
+  background-color: #d7b377;
+  border: none;
+`;
+
+const VerticalHR = styled.div`
+  width: 1px;
+  height: 20px;
+  background-color: #d7b377;
+  /* align-self: center; */
+  margin: 0 20px;
 `;
