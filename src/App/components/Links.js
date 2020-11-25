@@ -35,7 +35,7 @@ const LinksObjs = [
   },
 ];
 
-function Footer() {
+export default function Links() {
   const [emailCopied, setEmailCopied] = useState(false);
   const iconSize = 38;
 
@@ -56,8 +56,13 @@ function Footer() {
   }
 
   function renderLinks() {
-    return LinksObjs.map((obj) => (
-      <ContactContainer href={obj.link} target="_blank" rel="noreferrer">
+    return LinksObjs.map((obj, i) => (
+      <ContactContainer
+        href={obj.link}
+        target="_blank"
+        rel="noreferrer"
+        key={i}
+      >
         <h2 style={{ backgroundColor: obj.bgColor }}>{obj.name}</h2>
         <obj.icon
           color="white"
@@ -71,6 +76,7 @@ function Footer() {
   return (
     <Container>
       {renderLinks()}
+      <CopiedBox copied={emailCopied}>E-mail copied!</CopiedBox>
       <ContactContainer onClick={copyEmail}>
         <h2 style={{ backgroundColor: "#d92121" }}>
           {emailCopied ? "Copied!" : "E-Mail"}
@@ -85,23 +91,33 @@ function Footer() {
   );
 }
 
-export default Footer;
-
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   position: fixed;
-  left: 0;
-  top: 50%;
-  margin-top: -135px;
+  z-index: 2;
+  @media (max-width: 768px) {
+    bottom: 0;
+    left: 50%;
+    margin-left: -135px;
+  }
+  @media (min-width: 769px) {
+    flex-direction: column;
+    left: 0;
+    top: 50%;
+    margin-top: -135px;
+  }
 `;
 
 const ContactContainer = styled.a`
   display: flex;
   text-decoration: none;
-  h2 {
+  & h2 {
     color: white;
     font-family: TitilliumBold;
+    font-size: 0;
+    @media (min-width: 769px) {
+      font-size: 24px;
+    }
     text-align: center;
     align-self: center;
     white-space: nowrap;
@@ -111,13 +127,33 @@ const ContactContainer = styled.a`
     overflow: hidden;
     transition: 0.3s ease;
   }
-  svg {
+  & svg {
     padding: 8px;
   }
-  :hover {
-    cursor: pointer;
-    h2 {
-      width: 104px;
+  @media (min-width: 769px) {
+    :hover {
+      cursor: pointer;
+      & h2 {
+        width: 104px;
+      }
     }
+  }
+`;
+
+const CopiedBox = styled.p`
+  display: flex;
+  position: fixed;
+  color: white;
+  font-size: 20px;
+  bottom: 62px;
+  left: 50%;
+  background-color: #4f545a;
+  padding: 0 6px;
+  border-radius: 6px;
+  margin: 0 0 0 -66.5px;
+  opacity: ${(p) => (p.copied ? "1" : "0")};
+  transition: opacity 0.2s linear;
+  @media (min-width: 769px) {
+    opacity: 0;
   }
 `;

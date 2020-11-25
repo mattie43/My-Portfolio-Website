@@ -1,24 +1,58 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FaMoon, FaSun } from "react-icons/fa";
-import { useSelector, useDispatch } from "react-redux";
 
 function Header() {
-  const darkMode = useSelector((state) => state.darkMode);
-  const dispatch = useDispatch();
   const [section, setSection] = useState("ABOUT");
+  const [projSection, setProjSection] = useState(0);
 
-  // console.log(document.body.clientHeight);
+  let scrolling = false;
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY < 490) {
-      setSection("ABOUT");
-    } else if (window.scrollY > 890) {
-      setSection("PROJECTS");
-    } else if (window.scrollY > 2090) {
+  window.onscroll = () => {
+    scrolling = true;
+  };
+
+  setInterval(() => {
+    if (scrolling) {
+      scrolling = false;
+      checkScroll();
     }
-  });
+  }, 300);
+
+  function cardVisible(id) {
+    const elem = document.getElementById(id);
+    const bounding = elem.getBoundingClientRect();
+    return bounding.top < window.innerHeight / 2;
+  }
+
+  function scrollToCenter(el) {
+    document.getElementById(el).scrollIntoView({ block: "center" });
+  }
+
+  function checkScroll() {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      setSection("CONTACT");
+    } else if (cardVisible("resume")) {
+      setSection("RESUME");
+    } else if (cardVisible("projects")) {
+      setSection("PROJECTS");
+    } else {
+      setSection("ABOUT");
+    }
+
+    if (cardVisible("$ellular")) {
+      setProjSection(5);
+    } else if (cardVisible("Viaggiamo")) {
+      setProjSection(4);
+    } else if (cardVisible("Pokeiron")) {
+      setProjSection(3);
+    } else if (cardVisible("Whoop")) {
+      setProjSection(2);
+    } else if (cardVisible("GiFinder")) {
+      setProjSection(1);
+    } else {
+      setProjSection(0);
+    }
+  }
 
   return (
     <Container>
@@ -33,30 +67,67 @@ function Header() {
           style={{
             textDecoration: section === "PROJECTS" ? "underline" : "none",
           }}
-          onClick={() => window.scrollTo(0, 900)}
+          onClick={() => scrollToCenter("projects")}
         >
           PROJECTS
         </h2>
         <ProjectList>
-          <h3>GiFinder</h3>
-          <h3>Whoop</h3>
-          <h3>Pokeiron</h3>
-          <h3>Viagiammo</h3>
-          <h3>Sellular</h3>
+          <h3
+            style={{
+              textDecoration: projSection === 1 ? "underline" : "none",
+            }}
+            onClick={() => scrollToCenter("GiFinder")}
+          >
+            GiFinder
+          </h3>
+          <h3
+            style={{
+              textDecoration: projSection === 2 ? "underline" : "none",
+            }}
+            onClick={() => scrollToCenter("Whoop")}
+          >
+            Whoop
+          </h3>
+          <h3
+            style={{
+              textDecoration: projSection === 3 ? "underline" : "none",
+            }}
+            onClick={() => scrollToCenter("Pokeiron")}
+          >
+            Pokeiron
+          </h3>
+          <h3
+            style={{
+              textDecoration: projSection === 4 ? "underline" : "none",
+            }}
+            onClick={() => scrollToCenter("Viaggiamo")}
+          >
+            Viaggiamo
+          </h3>
+          <h3
+            style={{
+              textDecoration: projSection === 5 ? "underline" : "none",
+            }}
+            onClick={() => scrollToCenter("$ellular")}
+          >
+            Sellular
+          </h3>
         </ProjectList>
       </ProjectContainer>
       <h2
         style={{ textDecoration: section === "RESUME" ? "underline" : "none" }}
+        onClick={() => scrollToCenter("resume")}
       >
         RESUME
       </h2>
-      {/* <ModeContainer
-        darkMode={darkMode}
-        onClick={() => dispatch({ type: "DARK_MODE" })}
+      <h2
+        style={{
+          textDecoration: section === "CONTACT" ? "underline" : "none",
+        }}
+        onClick={() => window.scrollTo(0, document.body.clientHeight)}
       >
-        <FaMoon id="moon" size={30} />
-        <FaSun id="sun" size={30} />
-      </ModeContainer> */}
+        CONTACT ME
+      </h2>
     </Container>
   );
 }
@@ -69,15 +140,11 @@ const Container = styled.div`
   position: fixed;
   right: 0;
   top: 50%;
-  margin-top: -56px;
+  margin-top: -86px;
   padding: 4px 10px;
   z-index: 1;
   background-color: #303640;
-  /* c4e7d4 */
-  & a {
-    color: inherit;
-    text-decoration: none;
-  }
+  font-size: 18px;
   & h2 {
     margin: 0;
     align-self: flex-end;
@@ -93,7 +160,7 @@ const ProjectContainer = styled.div`
   :hover {
     cursor: pointer;
     & div {
-      height: 114px;
+      height: 164px;
     }
   }
 `;
@@ -108,27 +175,5 @@ const ProjectList = styled.div`
   transition: height 0.3s ease-in-out;
   & h3 {
     margin: 0;
-  }
-`;
-
-const ModeContainer = styled.div`
-  position: relative;
-  align-self: center;
-  overflow: hidden;
-  width: 30px;
-  height: 30px;
-  & svg:hover {
-    opacity: 0.6;
-    cursor: pointer;
-  }
-  #sun {
-    position: absolute;
-    top: ${(props) => (props.darkMode ? "-50px" : "0px")};
-    transition: top 0.5s;
-  }
-  #moon {
-    position: absolute;
-    top: ${(props) => (props.darkMode ? "0px" : "50px")};
-    transition: top 0.5s;
   }
 `;

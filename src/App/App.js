@@ -1,51 +1,31 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 import AboutMe from "./components/AboutMe";
-import MobileHome from "./components/MobileHome";
 import Navigation from "./components/Navigation";
-import MobileHeader from "./components/MobileHeader";
+import MobileNav from "./components/MobileNav";
 import Projects from "./components/Projects";
-import MobileProjects from "./components/MobileProjects";
 import Resume from "./components/Resume";
-import MobileFooter from "./components/MobileFooter";
+import ContactForm from "./components/ContactForm";
 import Links from "./components/Links";
 import galaxy from "./images/purpleGalaxy3.jpg";
 
 function App() {
-  const darkMode = useSelector((state) => state.darkMode);
-  const [mobile, setMobile] = useState(window.innerWidth < 768);
+  const [mobile, setMobile] = useState(window.innerWidth < 769);
 
   window.addEventListener("resize", () => {
-    setMobile(window.innerWidth < 768);
+    setMobile(window.innerWidth < 769);
   });
 
   return (
-    // <Router>
-    //   <Container
-    //     darkMode={darkMode}
-    //     style={{ backgroundImage: `url(${galaxy})` }}
-    //   >
-    //     {mobile ? <MobileHeader /> : <Navigation />}
-    //     <Route exact={true} path="/" component={mobile ? MobileHome : Home} />
-    //     <Route
-    //       path="/projects"
-    //       component={mobile ? MobileProjects : Projects}
-    //     />
-    //     <Route path="/resume" component={Resume} />
-    //     {mobile ? <MobileFooter /> : <Links />}
-    //   </Container>
-    // </Router>
-    <Container
-      darkMode={darkMode}
-      style={{ backgroundImage: `url(${galaxy})` }}
-    >
-      {mobile ? <MobileHeader /> : <Navigation />}
-      {mobile ? <MobileHome /> : <AboutMe />}
-      {mobile ? <MobileProjects /> : <Projects />}
-      {mobile ? <MobileFooter /> : <Links />}
+    <Container bgIMG={`url(${galaxy})`}>
+      {mobile ? <MobileNav /> : <Navigation />}
+      <Links />
+      <AboutMe />
+      <Projects />
+      <Resume />
+      <ContactForm />
+      {mobile ? <span style={{ margin: "27px" }} /> : null}
     </Container>
   );
 }
@@ -53,17 +33,27 @@ function App() {
 export default App;
 
 const Container = styled.div`
-  /* background-color: ${(props) => (props.darkMode ? "#282c34" : "white")}; */
   color: #d7b377;
+  background-color: #202329;
   transition: color 0.5s ease-out;
   min-height: 100vh;
   max-width: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  font-size: 20px;
 
+  background-image: ${(props) => props.bgIMG};
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
+  background-size: 150vh;
+  background-position-x: center;
+
+  @media (min-width: 769px) {
+    font-size: 25px;
+    background-size: cover;
+  }
+  @media (min-width: 1921px) {
+    font-size: 40px;
+  }
 `;
