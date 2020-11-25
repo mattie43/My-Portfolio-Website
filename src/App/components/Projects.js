@@ -1,123 +1,90 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FaGithub, FaEye, FaWifi } from "react-icons/fa";
+import { AwesomeButton } from "react-awesome-button";
+import "react-awesome-button/dist/styles.css";
 
-import * as PL from "../assests/ProjectList";
+import { ProjectList } from "../assests/ProjectList";
 
 export default function Projects() {
-  return (
-    <Container>
-      <IntroText>
-        <PL.Intro />
-      </IntroText>
-      <SingleCard>
-        <ProjectTitle>GiFinder</ProjectTitle>
+  function renderProjects() {
+    return ProjectList.map((project, i) => (
+      <SingleCard key={i} id={project.title}>
+        <h1>{project.title}</h1>
         <HorizontalLine />
-        <ProjectContainer>
+        <CardContainer>
           <LeftCard>
             <img
-              src="https://images.idgesg.net/images/article/2019/07/chrome-screenshot-2-100801438-large.jpg"
-              alt="GiFinder Screenshot"
-              title="GiFinder"
+              src={project.img}
+              alt={project.title + " Screenshot"}
+              title={project.title}
             />
-            <a
-              href="https://github.com/mattie43/Mod1-FinalProject-GiFinder"
+
+            <AwesomeButton
+              href={project.sourceFront}
               target="_blank"
               rel="noreferrer"
+              className="githubBtn"
             >
               <FaGithub size={22} />
-              <span>Source Code</span>
-            </a>
-            <div>
+              <span>
+                {project.sourceBack ? "Source Code (FE)" : "Source Code"}
+              </span>
+            </AwesomeButton>
+            {project.sourceBack ? (
+              <AwesomeButton
+                href={project.sourceBack}
+                target="_blank"
+                rel="noreferrer"
+                className="githubBtn"
+              >
+                <FaGithub size={22} />
+                <span>
+                  {project.sourceBack ? "Source Code (BE)" : "Source Code"}
+                </span>
+              </AwesomeButton>
+            ) : null}
+            <AwesomeButton
+              href={project.video}
+              target="_blank"
+              rel="noreferrer"
+              className="videoBtn"
+            >
               <FaEye size={22} />
               <span>Video Demo</span>
-            </div>
-            <div>
+            </AwesomeButton>
+            <AwesomeButton
+              href={project.live}
+              target="_blank"
+              rel="noreferrer"
+              className="liveBtn"
+            >
               <FaWifi size={22} />
               <span>Live Demo</span>
-            </div>
+            </AwesomeButton>
           </LeftCard>
           <VerticalHR />
-          <PL.GiFinder />
-        </ProjectContainer>
+          <p>{project.desc}</p>
+        </CardContainer>
       </SingleCard>
-      <SingleCard>
-        <PL.Whoop />
-        <a
-          href="https://github.com/mattie43/Mod2FinalProject/"
-          target="_blank"
-          rel="noreferrer"
-          style={{ alignSelf: "center" }}
-        >
-          <FaGithub size={50} />
+    ));
+  }
+
+  return (
+    <Container>
+      <IntroText id="projects">
+        <h2>PROJECTS</h2>
+        In my 15 weeks at{" "}
+        <a href="https://flatironschool.com/" target="_blank" rel="noreferrer">
+          Flatiron School
         </a>
-      </SingleCard>
-      <SingleCard>
-        <PL.Pokeiron />
-        <div style={{ alignSelf: "center" }}>
-          <a
-            href="https://github.com/mattie43/Mod3PokemonProject-FrontEnd/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaGithub
-              size={50}
-              style={{ marginLeft: "20px", marginRight: "20px" }}
-            />
-          </a>
-          <a
-            href="https://github.com/islommashanlo/Mod3-Pokemon-Project-Backend"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaGithub size={50} style={{ marginLeft: "20px" }} />
-          </a>
-        </div>
-      </SingleCard>
-      <SingleCard>
-        <PL.Viaggiamo />
-        <div style={{ alignSelf: "center" }}>
-          <a
-            href="https://github.com/slurio/slurio-viaggiamo-frontend-"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaGithub
-              size={50}
-              style={{ marginLeft: "20px", marginRight: "20px" }}
-            />
-          </a>
-          <a
-            href="https://github.com/mattie43/Viaggiamo-Backend"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaGithub size={50} style={{ marginLeft: "20px" }} />
-          </a>
-        </div>
-      </SingleCard>
-      <SingleCard>
-        <PL.Sellular />
-        <div style={{ alignSelf: "center" }}>
-          <a
-            href="https://github.com/mattie43/Sellular-Frontend"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaGithub
-              size={50}
-              style={{ marginLeft: "20px", marginRight: "20px" }}
-            />
-          </a>
-          <a
-            href="https://github.com/mattie43/Sellular-Backend"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaGithub size={50} style={{ marginLeft: "20px" }} />
-          </a>
-        </div>
-      </SingleCard>
+        , I have created five apps using Ruby, Rails, Javascript, React, and
+        React Native. Four of those apps were done with a partner, with the
+        final app being a solo project. I've also created a web automation bot
+        in Python that my brother uses to create tee times for the weekends.
+        Demo video and Github links are on the bottom of each description.
+      </IntroText>
+      {renderProjects()}
     </Container>
   );
 }
@@ -125,24 +92,28 @@ export default function Projects() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 65%;
+  width: 90%;
   align-self: center;
-  margin-bottom: 30px;
   align-items: center;
   justify-content: center;
   & a {
     color: inherit;
   }
+  @media (min-width: 769px) {
+    width: 65%;
+  }
 `;
 
-const IntroText = styled.p`
+const IntroText = styled.div`
   align-self: center;
   text-align: center;
-  font-size: 25px;
   padding: 20px;
   margin: 0 0 20px 0;
-  background-color: #282c34;
+  background-color: rgba(40, 44, 52, 0.95);
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+  & h2 {
+    margin: 0;
+  }
 `;
 
 const SingleCard = styled.div`
@@ -151,17 +122,27 @@ const SingleCard = styled.div`
   align-items: center;
   padding: 20px;
   margin-bottom: 20px;
-  background-color: #282c34;
+  background-color: rgba(40, 44, 52, 0.95);
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
   & p {
-    font-size: 25px;
     text-align: center;
     margin: 0;
-    max-width: 50%;
+    @media (min-width: 769px) {
+      max-width: 50%;
+    }
   }
-  & :nth-child(3) {
-    display: flex;
-    margin-top: 10px;
+  & h1 {
+    margin: 0;
+  }
+`;
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding-top: 15px;
+  @media (min-width: 769px) {
+    flex-direction: row;
   }
 `;
 
@@ -169,35 +150,48 @@ const LeftCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  & a {
+    margin-bottom: 6px;
+  }
+  & .aws-btn {
+    --button-default-height: 34px;
+    --button-default-font-size: 18px;
+    --button-default-border-radius: 0px;
+    --button-horizontal-padding: 6px;
+    --button-raise-level: 3px;
+    --button-hover-pressure: 2;
+    --transform-speed: 0.185s;
+    --button-primary-color-light: #d4d9e4;
+    --button-primary-border: none;
+  }
+  & .githubBtn {
+    --button-primary-color: #50545a;
+    --button-primary-color-hover: #60666e;
+    --button-primary-color-dark: #282a2e;
+  }
+  & .videoBtn {
+    --button-primary-color: #2d72ba;
+    --button-primary-color-hover: #3c8fe8;
+    --button-primary-color-dark: #173a5e;
+  }
+  & .liveBtn {
+    --button-primary-color: #00ab6c;
+    --button-primary-color-hover: #08c781;
+    --button-primary-color-dark: #004028;
+  }
   & img {
     max-width: 100%;
     margin-bottom: 20px;
+    margin-top: 20px;
+    @media (min-width: 769px) {
+      margin-top: 0;
+    }
   }
-  & span {
-    font-size: 20px;
-    margin-left: 10px;
-  }
-  & svg {
-    margin-bottom: -4px;
-  }
-  & a {
-    text-decoration: none;
-  }
-  & a:hover {
-    transform: scale(1.1);
-  }
-`;
-
-const ProjectTitle = styled.h1`
-  margin: 0;
-`;
-
-const ProjectContainer = styled.div`
-  display: flex;
 `;
 
 const HorizontalLine = styled.hr`
-  width: 90%;
+  width: 85%;
   height: 1px;
   background-color: #d7b377;
   border: none;
@@ -205,8 +199,12 @@ const HorizontalLine = styled.hr`
 
 const VerticalHR = styled.div`
   width: 1px;
-  height: 20px;
+  max-height: 34vh;
+  height: 500px;
   background-color: #d7b377;
-  /* align-self: center; */
+  align-self: center;
   margin: 0 20px;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
