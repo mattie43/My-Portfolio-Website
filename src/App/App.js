@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import AboutMe from "./components/AboutMe";
 import Navigation from "./components/Navigation";
@@ -12,14 +12,39 @@ import galaxy from "./images/purpleGalaxy3.jpg";
 
 function App() {
   const [mobile, setMobile] = useState(window.innerWidth < 769);
+  const [navBarOpen, setNavBarOpen] = useState(false);
 
   window.addEventListener("resize", () => {
     setMobile(window.innerWidth < 769);
   });
 
+  function isMobileSafari() {
+    return (
+      navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
+      navigator.userAgent.match(/AppleWebKit/)
+    );
+  }
+
+  function checkNav(e) {
+    if (!e.target.closest(".navbar")) {
+      setNavBarOpen(false);
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("click", (e) => checkNav(e));
+    return () => {
+      window.removeEventListener("click", checkNav);
+    };
+  }, []);
+
   return (
-    <Container bgIMG={`url(${galaxy})`}>
-      {mobile ? <MobileNav /> : <Navigation />}
+    <Container bgIMG={isMobileSafari() ? null : `url(${galaxy})`}>
+      {mobile ? (
+        <MobileNav navBarOpen={navBarOpen} setNavBarOpen={setNavBarOpen} />
+      ) : (
+        <Navigation />
+      )}
       <Links />
       <AboutMe />
       <Projects />
@@ -34,7 +59,7 @@ export default App;
 
 const Container = styled.div`
   color: #d7b377;
-  background-color: #202329;
+  background-color: #f5f5f5;
   transition: color 0.5s ease-out;
   min-height: 100vh;
   max-width: 100%;
@@ -43,7 +68,7 @@ const Container = styled.div`
   flex-direction: column;
   font-size: 20px;
 
-  background-image: ${(props) => props.bgIMG};
+  background-image: ${(p) => p.bgIMG};
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 150vh;

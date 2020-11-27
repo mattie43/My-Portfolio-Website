@@ -52,4 +52,12 @@ export const ProjectList = [
     video: "https://github.com/mattie43/Sellular-Backend",
     live: "https://github.com/mattie43/Sellular-Backend",
   },
+  {
+    title: "My Portfolio",
+    desc:
+      "Yes, this very website! Built with React and designed to be mobile first.",
+    img:
+      "https://images.idgesg.net/images/article/2019/07/chrome-screenshot-2-100801438-large.jpg",
+    sourceFront: "https://github.com/mattie43/mywebsite",
+  },
 ];

@@ -17,7 +17,7 @@ export default function ContactForm() {
       .sendForm(
         "service_59fyl4s",
         "template_ifxjykj",
-        e.target,
+        document.querySelector("#contact-form"),
         "user_CAQSurlILXzbCdcFAjSgu"
       )
       .then(
@@ -35,8 +35,8 @@ export default function ContactForm() {
   }
 
   return (
-    <Container id="contact">
-      <form onSubmit={sendEmail}>
+    <Container>
+      <form id="contact-form">
         <h2>CONTACT ME</h2>
         <label>Name</label>
         <input
@@ -58,7 +58,7 @@ export default function ContactForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         ></textarea>
-        <AwesomeButton type="primary" onPress="submit">
+        <AwesomeButton type="primary" onPress={sendEmail}>
           <FaPaperPlane size={22} />
           Send
         </AwesomeButton>
