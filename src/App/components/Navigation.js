@@ -29,16 +29,6 @@ function Header() {
   }
 
   function checkScroll() {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      setSection("CONTACT");
-    } else if (cardVisible("resume")) {
-      setSection("RESUME");
-    } else if (cardVisible("projects")) {
-      setSection("PROJECTS");
-    } else {
-      setSection("ABOUT");
-    }
-
     if (cardVisible("$ellular")) {
       setProjSection(5);
     } else if (cardVisible("Viaggiamo")) {
@@ -51,6 +41,17 @@ function Header() {
       setProjSection(1);
     } else {
       setProjSection(0);
+    }
+
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      setSection("CONTACT");
+    } else if (cardVisible("resume")) {
+      setSection("RESUME");
+      setProjSection(0);
+    } else if (cardVisible("projects")) {
+      setSection("PROJECTS");
+    } else {
+      setSection("ABOUT");
     }
   }
 

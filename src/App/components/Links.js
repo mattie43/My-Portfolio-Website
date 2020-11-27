@@ -40,10 +40,10 @@ export default function Links() {
   const iconSize = 38;
 
   function copyEmail() {
-    // navigator.clipboard.writeText("ericksenm93@ymail.com");
+    // navigator.clipboard.writeText("email");
 
     const textField = document.createElement("textarea");
-    textField.innerText = "ericksenm93@ymail.com";
+    textField.innerText = "matt@mattericksen.com";
     document.body.appendChild(textField);
     textField.select();
     document.execCommand("copy");
@@ -154,6 +154,6 @@ const CopiedBox = styled.p`
   opacity: ${(p) => (p.copied ? "1" : "0")};
   transition: opacity 0.2s linear;
   @media (min-width: 769px) {
-    opacity: 0;
+    display: none;
   }
 `;

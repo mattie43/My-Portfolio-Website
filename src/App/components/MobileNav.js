@@ -1,37 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { HamburgerCollapse } from "react-animated-burgers";
 
-function MobileHeader() {
-  const [navBarOpen, setNavBarOpen] = useState(false);
+function MobileHeader(props) {
+  // const [navBarOpen, setNavBarOpen] = useState(false);
 
-  function scrollToCenter(el) {
-    document.getElementById(el).scrollIntoView({ block: "center" });
-  }
-
-  function scrollTo(bool) {
-    setNavBarOpen(false);
-    bool
-      ? window.scrollTo(0, 0)
-      : window.scrollTo(0, document.body.clientHeight);
+  function scrollTo(input) {
+    props.setNavBarOpen(false);
+    switch (input) {
+      case "projects":
+        document.getElementById("projects").scrollIntoView({ block: "center" });
+        break;
+      case "resume":
+        document.getElementById("resume").scrollIntoView({ block: "center" });
+        break;
+      case "top":
+        window.scrollTo(0, 0);
+        break;
+      case "bottom":
+        window.scrollTo(0, document.body.clientHeight);
+        break;
+      default:
+        break;
+    }
   }
 
   return (
-    <Container style={{ height: navBarOpen ? "250px" : "0" }}>
+    <Container className="navbar">
       <HamburgerCollapse
-        isActive={navBarOpen}
+        isActive={props.navBarOpen}
         barColor="#d7b377"
-        onClick={() => setNavBarOpen(!navBarOpen)}
-        style={{
-          position: "fixed",
-          outline: "none",
-        }}
+        onClick={() => props.setNavBarOpen(!props.navBarOpen)}
       />
-      <NavContainer>
-        <h1 onClick={() => scrollTo(true)}>ABOUT ME</h1>
-        <h1 onClick={() => scrollToCenter("projects")}>PROJECTS</h1>
-        <h1 onClick={() => scrollToCenter("resume")}>RESUME</h1>
-        <h1 onClick={() => scrollTo(false)}>CONTACT ME</h1>
+      <NavContainer open={props.navBarOpen}>
+        <h1 onClick={() => scrollTo("top")}>ABOUT ME</h1>
+        <h1 onClick={() => scrollTo("projects")}>PROJECTS</h1>
+        <h1 onClick={() => scrollTo("resume")}>RESUME</h1>
+        <h1 onClick={() => scrollTo("bottom")}>CONTACT ME</h1>
       </NavContainer>
     </Container>
   );
@@ -42,8 +47,6 @@ export default MobileHeader;
 const Container = styled.div`
   display: flex;
   width: 100vw;
-  transition: height 0.5s;
-  background-color: #4f545a;
   position: fixed;
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
   z-index: 2;
@@ -51,16 +54,23 @@ const Container = styled.div`
     color: inherit;
     text-decoration: none;
   }
+  & button {
+    position: fixed;
+    outline: none;
+  }
 `;
 
 const NavContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-end;
-  margin-right: 30px;
+  padding-right: 20px;
   overflow-y: hidden;
+  background-color: #4f545a;
+  transition: height 0.5s;
+  height: ${(p) => (p.open ? "250px" : "0")};
   & h1 {
     margin: 0;
   }

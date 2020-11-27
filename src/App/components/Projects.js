@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { FaGithub, FaEye, FaWifi } from "react-icons/fa";
+import { FaGithub, FaEye, FaWifi, FaTimes } from "react-icons/fa";
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
 
 import { ProjectList } from "../assests/ProjectList";
 
 export default function Projects() {
+  const [imgOpen, setImgOpen] = useState(false);
+
   function renderProjects() {
     return ProjectList.map((project, i) => (
       <SingleCard key={i} id={project.title}>
@@ -18,6 +20,7 @@ export default function Projects() {
               src={project.img}
               alt={project.title + " Screenshot"}
               title={project.title}
+              onClick={() => setImgOpen(project.img)}
             />
 
             <AwesomeButton
@@ -39,29 +42,31 @@ export default function Projects() {
                 className="githubBtn"
               >
                 <FaGithub size={22} />
-                <span>
-                  {project.sourceBack ? "Source Code (BE)" : "Source Code"}
-                </span>
+                <span>Source Code (BE)</span>
               </AwesomeButton>
             ) : null}
-            <AwesomeButton
-              href={project.video}
-              target="_blank"
-              rel="noreferrer"
-              className="videoBtn"
-            >
-              <FaEye size={22} />
-              <span>Video Demo</span>
-            </AwesomeButton>
-            <AwesomeButton
-              href={project.live}
-              target="_blank"
-              rel="noreferrer"
-              className="liveBtn"
-            >
-              <FaWifi size={22} />
-              <span>Live Demo</span>
-            </AwesomeButton>
+            {project.video ? (
+              <AwesomeButton
+                href={project.video}
+                target="_blank"
+                rel="noreferrer"
+                className="videoBtn"
+              >
+                <FaEye size={22} />
+                <span>Video Demo</span>
+              </AwesomeButton>
+            ) : null}
+            {project.live ? (
+              <AwesomeButton
+                href={project.live}
+                target="_blank"
+                rel="noreferrer"
+                className="liveBtn"
+              >
+                <FaWifi size={22} />
+                <span>Live Demo</span>
+              </AwesomeButton>
+            ) : null}
           </LeftCard>
           <VerticalHR />
           <p>{project.desc}</p>
@@ -70,24 +75,67 @@ export default function Projects() {
     ));
   }
 
+  function modal() {
+    return (
+      <Modal imgOpen={imgOpen}>
+        <img src={imgOpen ? imgOpen : null} alt="" />
+        <FaTimes size={50} onClick={() => setImgOpen(false)} />
+      </Modal>
+    );
+  }
+
   return (
-    <Container>
-      <IntroText id="projects">
-        <h2>PROJECTS</h2>
-        In my 15 weeks at{" "}
-        <a href="https://flatironschool.com/" target="_blank" rel="noreferrer">
-          Flatiron School
-        </a>
-        , I have created five apps using Ruby, Rails, Javascript, React, and
-        React Native. Four of those apps were done with a partner, with the
-        final app being a solo project. I've also created a web automation bot
-        in Python that my brother uses to create tee times for the weekends.
-        Demo video and Github links are on the bottom of each description.
-      </IntroText>
-      {renderProjects()}
-    </Container>
+    <>
+      {modal()}
+      <Container>
+        <IntroText id="projects">
+          <h2>PROJECTS</h2>
+          In my 15 weeks at{" "}
+          <a
+            href="https://flatironschool.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Flatiron School
+          </a>
+          , I have created five apps using Ruby, Rails, Javascript, React, and
+          React Native. Four of those apps were done with a partner, with the
+          final app being a solo project. I've also created a web automation bot
+          in Python that my brother uses to create tee times for the weekends.
+          Demo video and Github links are on the bottom of each description.
+        </IntroText>
+        {renderProjects()}
+      </Container>
+    </>
   );
 }
+
+const Modal = styled.div`
+  display: flex;
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  background-color: rgba(40, 44, 52, 0.7);
+  transform: ${(p) => (p.imgOpen ? "scale(1)" : "scale(0)")};
+  & svg {
+    position: absolute;
+    z-index: 3;
+    top: 20px;
+    right: 30px;
+    cursor: pointer;
+  }
+  & img {
+    display: flex;
+    position: fixed;
+    max-height: 70vh;
+    max-width: 70vw;
+    transform: ${(p) => (p.imgOpen ? "scale(1)" : "scale(0)")};
+    transition: transform 0.2s linear;
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -184,6 +232,7 @@ const LeftCard = styled.div`
     max-width: 100%;
     margin-bottom: 20px;
     margin-top: 20px;
+    cursor: pointer;
     @media (min-width: 769px) {
       margin-top: 0;
     }
