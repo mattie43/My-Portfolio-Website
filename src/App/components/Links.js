@@ -98,13 +98,13 @@ const Container = styled.div`
   @media (max-width: 768px) {
     bottom: 0;
     left: 50%;
-    margin-left: -135px;
+    transform: translateX(-50%);
   }
   @media (min-width: 769px) {
     flex-direction: column;
     left: 0;
     top: 50%;
-    margin-top: -135px;
+    transform: translateY(-50%);
   }
 `;
 

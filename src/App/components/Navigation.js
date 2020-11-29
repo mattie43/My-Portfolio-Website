@@ -141,9 +141,10 @@ const Container = styled.div`
   position: fixed;
   right: 0;
   top: 50%;
+  /* transform: translateY(-50%); */
   margin-top: -86px;
   padding: 4px 10px;
-  z-index: 1;
+  z-index: 2;
   background-color: #303640;
   font-size: 18px;
   & h2 {
