@@ -9,6 +9,7 @@ import Resume from "./components/Resume";
 import ContactForm from "./components/ContactForm";
 import Links from "./components/Links";
 import galaxy from "./images/purpleGalaxy3.jpg";
+import prism from "./images/prism.png";
 
 function App() {
   const [mobile, setMobile] = useState(window.innerWidth < 769);
@@ -39,7 +40,10 @@ function App() {
   }, []);
 
   return (
-    <Container bgIMG={isMobileSafari() ? null : `url(${galaxy})`}>
+    <Container
+      bgIMG={isMobileSafari() ? null : `url(${galaxy})`}
+      prism={`url(${prism})`}
+    >
       {mobile ? (
         <MobileNav navBarOpen={navBarOpen} setNavBarOpen={setNavBarOpen} />
       ) : (
@@ -68,14 +72,16 @@ const Container = styled.div`
   flex-direction: column;
   font-size: 20px;
 
-  background-image: ${(p) => p.bgIMG};
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-image: ${(p) => p.prism};
+  background-repeat: repeat;
   background-size: 150vh;
   background-position-x: center;
 
   @media (min-width: 769px) {
     font-size: 25px;
+    background-image: ${(p) => p.bgIMG};
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     background-size: cover;
   }
   @media (min-width: 1921px) {
