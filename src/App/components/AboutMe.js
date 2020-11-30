@@ -2,29 +2,26 @@ import React from "react";
 import styled from "styled-components";
 import { FaMinus, FaChevronDown } from "react-icons/fa";
 
-import headshot from "../images/headshot.jpg";
+import tempHS from "../images/tempHS.png";
 
 export default function AboutMe() {
   function scrollToWork() {
-    document.getElementById("projects").scrollIntoView({ block: "center" });
+    document.getElementById("projects").scrollIntoView();
   }
 
   return (
-    <Container>
-      <Card>
-        <Img src={headshot} />
-        <Info>
-          <p>Hey, I'm</p>
-          <div>
-            <FaMinus size={30} />
-            <span>
-              Matt <br />
-              Ericksen
-            </span>
-            <FaMinus size={30} />
-          </div>
-        </Info>
-      </Card>
+    <Container img={`url(${tempHS})`}>
+      <Info>
+        <p>Hey, I'm</p>
+        <div>
+          <FaMinus size={30} />
+          <span>
+            Matt <br />
+            Ericksen
+          </span>
+          <FaMinus size={30} />
+        </div>
+      </Info>
       <WorkButton onClick={scrollToWork}>
         <FaChevronDown size={35} />
         My Work
@@ -36,81 +33,64 @@ export default function AboutMe() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
   height: 100vh;
-  width: 80%;
-  align-self: center;
-  justify-self: center;
+  width: 100%;
+  background-image: ${(p) => p.img};
+  background-size: cover;
+  background-repeat: no-repeat;
   justify-content: center;
   align-items: center;
-  @media (min-width: 769px) {
-    width: 65%;
-  }
-`;
-
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(40, 44, 52, 0.95);
-  align-items: center;
-  padding: 20px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
-  width: 100%;
-  @media (min-width: 769px) {
-    justify-content: space-evenly;
-    flex-direction: row;
-    height: 55%;
-  }
-`;
-
-const Img = styled.img`
-  max-width: 90%;
-  max-height: 80%;
-  box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
-  @media (min-width: 769px) {
-    max-width: 45%;
-  }
+  margin-bottom: 200px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
 `;
 
 const Info = styled.div`
   text-align: center;
+  font-family: Script;
   & p {
-    margin-bottom: 0;
+    margin: 0;
   }
   & div {
     display: flex;
     align-items: center;
     & span {
-      font-family: TitilliumBold;
-      font-size: 2em;
+      font-size: 3em;
       font-weight: bold;
-      margin: 10px 20px 0 20px;
+      margin: 20px 40px;
       line-height: 1.2;
       letter-spacing: 0.35rem;
+    }
+    & svg {
+      transform: scaleX(2);
     }
   }
   @media (min-width: 769px) {
     font-size: 30px;
-    max-width: 50%;
   }
 `;
 
-const WorkButton = styled.span`
+const WorkButton = styled.div`
   display: flex;
+  position: absolute;
+  bottom: 20px;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
   font-size: 2rem;
   cursor: pointer;
-  & svg {
-    margin: 0 10px;
-    animation: upDown 0.7s infinite alternate linear;
+  :hover {
+    color: #00adb5;
+    transition: 0.4s ease;
   }
-  @keyframes upDown {
+  & svg {
+    animation: wave 0.6s infinite alternate ease;
+    margin-right: 10px;
+  }
+  @keyframes wave {
     from {
-      transform: translateY(-5px);
+      transform: translateY(0px);
     }
     to {
-      transform: translateY(5px);
+      transform: translateY(10px);
     }
   }
 `;

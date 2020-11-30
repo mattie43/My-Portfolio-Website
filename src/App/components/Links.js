@@ -37,7 +37,33 @@ const LinksObjs = [
 
 export default function Links() {
   const [emailCopied, setEmailCopied] = useState(false);
+  const [visible, setVisible] = useState(false);
   const iconSize = 38;
+
+  let scrolling = false;
+
+  window.onscroll = () => {
+    scrolling = true;
+  };
+
+  setInterval(() => {
+    if (scrolling) {
+      scrolling = false;
+      checkScroll();
+    }
+  }, 300);
+
+  function checkScroll() {
+    const el = document.querySelector("#projects");
+    if (!visible && el.getBoundingClientRect().top < window.innerHeight / 2) {
+      setVisible(true);
+    } else if (
+      visible &&
+      el.getBoundingClientRect().top > window.innerHeight / 2
+    ) {
+      setVisible(false);
+    }
+  }
 
   function copyEmail() {
     // navigator.clipboard.writeText("email");
@@ -74,7 +100,7 @@ export default function Links() {
   }
 
   return (
-    <Container>
+    <Container visible={visible}>
       {renderLinks()}
       <CopiedBox copied={emailCopied}>E-mail copied!</CopiedBox>
       <ContactContainer onClick={copyEmail}>
@@ -99,12 +125,35 @@ const Container = styled.div`
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+    & a {
+      transition: transform 0.7s ease;
+      transform: ${(p) => (p.visible ? "translateY(0)" : "translateY(100%)")};
+    }
   }
   @media (min-width: 769px) {
     flex-direction: column;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
+    & a {
+      transition: transform 0.7s ease;
+      transform: ${(p) => (p.visible ? "translateX(0)" : "translateX(-100%)")};
+    }
+  }
+  & a:nth-of-type(1) {
+    transition-delay: 100ms;
+  }
+  & a:nth-of-type(2) {
+    transition-delay: 200ms;
+  }
+  & a:nth-of-type(3) {
+    transition-delay: 300ms;
+  }
+  & a:nth-of-type(4) {
+    transition-delay: 400ms;
+  }
+  & a:nth-of-type(5) {
+    transition-delay: 500ms;
   }
 `;
 
@@ -125,7 +174,7 @@ const ContactContainer = styled.a`
     padding: 9px 0;
     width: 0;
     overflow: hidden;
-    transition: 0.3s ease;
+    transition: width 0.4s ease;
   }
   & svg {
     padding: 8px;

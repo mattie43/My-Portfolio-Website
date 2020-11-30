@@ -58,7 +58,10 @@ function Header() {
   return (
     <Container>
       <h2
-        style={{ textDecoration: section === "ABOUT" ? "underline" : "none" }}
+        style={{
+          textDecoration: section === "ABOUT" ? "underline" : "none",
+          color: section === "ABOUT" ? "#00adb5" : "inherit",
+        }}
         onClick={() => window.scrollTo(0, 0)}
       >
         ABOUT ME
@@ -67,6 +70,7 @@ function Header() {
         <h2
           style={{
             textDecoration: section === "PROJECTS" ? "underline" : "none",
+            color: section === "PROJECTS" ? "#00adb5" : "inherit",
           }}
           onClick={() => scrollToCenter("projects")}
         >
@@ -76,6 +80,7 @@ function Header() {
           <h3
             style={{
               textDecoration: projSection === 1 ? "underline" : "none",
+              color: projSection === 1 ? "#00adb5" : "inherit",
             }}
             onClick={() => scrollToCenter("GiFinder")}
           >
@@ -84,6 +89,7 @@ function Header() {
           <h3
             style={{
               textDecoration: projSection === 2 ? "underline" : "none",
+              color: projSection === 2 ? "#00adb5" : "inherit",
             }}
             onClick={() => scrollToCenter("Whoop")}
           >
@@ -92,6 +98,7 @@ function Header() {
           <h3
             style={{
               textDecoration: projSection === 3 ? "underline" : "none",
+              color: projSection === 3 ? "#00adb5" : "inherit",
             }}
             onClick={() => scrollToCenter("Pokeiron")}
           >
@@ -100,6 +107,7 @@ function Header() {
           <h3
             style={{
               textDecoration: projSection === 4 ? "underline" : "none",
+              color: projSection === 4 ? "#00adb5" : "inherit",
             }}
             onClick={() => scrollToCenter("Viaggiamo")}
           >
@@ -108,6 +116,7 @@ function Header() {
           <h3
             style={{
               textDecoration: projSection === 5 ? "underline" : "none",
+              color: projSection === 5 ? "#00adb5" : "inherit",
             }}
             onClick={() => scrollToCenter("$ellular")}
           >
@@ -116,7 +125,10 @@ function Header() {
         </ProjectList>
       </ProjectContainer>
       <h2
-        style={{ textDecoration: section === "RESUME" ? "underline" : "none" }}
+        style={{
+          textDecoration: section === "RESUME" ? "underline" : "none",
+          color: section === "RESUME" ? "#00adb5" : "inherit",
+        }}
         onClick={() => scrollToCenter("resume")}
       >
         RESUME
@@ -124,6 +136,7 @@ function Header() {
       <h2
         style={{
           textDecoration: section === "CONTACT" ? "underline" : "none",
+          color: section === "CONTACT" ? "#00adb5" : "inherit",
         }}
         onClick={() => window.scrollTo(0, document.body.clientHeight)}
       >
@@ -145,7 +158,9 @@ const Container = styled.div`
   margin-top: -86px;
   padding: 4px 10px;
   z-index: 2;
-  background-color: #303640;
+  /* background-color: #303640; */
+  background-color: rgba(40, 44, 52, 1);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
   font-size: 18px;
   & h2 {
     margin: 0;

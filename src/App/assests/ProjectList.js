@@ -1,3 +1,16 @@
+export const ProjectIntro = (
+  <>
+    In my 15 weeks at{" "}
+    <a href="https://flatironschool.com/" target="_blank" rel="noreferrer">
+      Flatiron School
+    </a>
+    , I have created five apps using Ruby, Rails, Javascript, React, and React
+    Native. Four of those apps were done with a partner, with the final app
+    being a solo project. I've also created a web automation bot in Python that
+    my brother uses to create tee times for the weekends.
+  </>
+);
+
 export const ProjectList = [
   {
     title: "GiFinder",
