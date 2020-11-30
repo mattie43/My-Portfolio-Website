@@ -1,196 +1,155 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { HamburgerCollapse } from "react-animated-burgers";
+import { throttle } from "lodash";
 
-function Header() {
-  const [section, setSection] = useState("ABOUT");
-  const [projSection, setProjSection] = useState(0);
+const NavigationObjs = [
+  {
+    name: "About Me",
+    id: "about",
+  },
+  {
+    name: "Projects",
+    id: "projects",
+  },
+  {
+    name: "Resume /",
+    id: "resume",
+  },
+  {
+    name: "Contact",
+    id: "resume",
+  },
+];
 
-  let scrolling = false;
+export default function Navigation() {
+  const [section, setSection] = useState("about");
+  const [navOpen, setNavOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
 
-  window.onscroll = () => {
-    scrolling = true;
-  };
+  window.addEventListener("scroll", throttle(checkVisible, 300));
+  window.addEventListener("scroll", throttle(checkSection, 300));
 
-  setInterval(() => {
-    if (scrolling) {
-      scrolling = false;
-      checkScroll();
+  function checkSection() {
+    if (sectionVisible("resume")) {
+      setSection("resume");
+    } else if (sectionVisible("projects")) {
+      setSection("projects");
+    } else {
+      setSection("about");
     }
-  }, 300);
-
-  function cardVisible(id) {
-    const elem = document.getElementById(id);
-    const bounding = elem.getBoundingClientRect();
-    return bounding.top < window.innerHeight / 2;
+    function sectionVisible(id) {
+      const el = document.getElementById(id);
+      return el.getBoundingClientRect().top < window.innerHeight / 2;
+    }
   }
 
-  function scrollToCenter(el) {
-    document.getElementById(el).scrollIntoView({ block: "center" });
+  function checkVisible() {
+    const el = document.querySelector("#projects");
+    if (!visible && el.getBoundingClientRect().top < window.innerHeight / 2) {
+      setVisible(true);
+    } else if (
+      visible &&
+      el.getBoundingClientRect().top > window.innerHeight / 2
+    ) {
+      setVisible(false);
+      setNavOpen(false);
+    }
   }
 
-  function checkScroll() {
-    if (cardVisible("$ellular")) {
-      setProjSection(5);
-    } else if (cardVisible("Viaggiamo")) {
-      setProjSection(4);
-    } else if (cardVisible("Pokeiron")) {
-      setProjSection(3);
-    } else if (cardVisible("Whoop")) {
-      setProjSection(2);
-    } else if (cardVisible("GiFinder")) {
-      setProjSection(1);
-    } else {
-      setProjSection(0);
+  function scrollToID(id) {
+    if (window.matchMedia("(max-width: 769px)").matches) {
+      setNavOpen(false);
     }
+    switch (id) {
+      case "about":
+        window.scrollTo(0, 0);
+        break;
+      case "projects":
+        document.getElementById("projects").scrollIntoView();
+        break;
+      default:
+        window.scrollTo(0, document.body.scrollHeight);
+        break;
+    }
+  }
 
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      setSection("CONTACT");
-    } else if (cardVisible("resume")) {
-      setSection("RESUME");
-      setProjSection(0);
-    } else if (cardVisible("projects")) {
-      setSection("PROJECTS");
-    } else {
-      setSection("ABOUT");
-    }
+  function renderNav() {
+    return NavigationObjs.map((obj, i) => (
+      <div key={i}>
+        <h2
+          onClick={() => scrollToID(obj.id)}
+          style={{
+            color: section === obj.id ? "#282c34" : "#f5f5f5",
+          }}
+        >
+          {obj.name}
+        </h2>
+      </div>
+    ));
   }
 
   return (
-    <Container>
-      <h2
-        style={{
-          textDecoration: section === "ABOUT" ? "underline" : "none",
-          color: section === "ABOUT" ? "#00adb5" : "inherit",
-        }}
-        onClick={() => window.scrollTo(0, 0)}
-      >
-        ABOUT ME
-      </h2>
-      <ProjectContainer>
-        <h2
-          style={{
-            textDecoration: section === "PROJECTS" ? "underline" : "none",
-            color: section === "PROJECTS" ? "#00adb5" : "inherit",
-          }}
-          onClick={() => scrollToCenter("projects")}
-        >
-          PROJECTS
-        </h2>
-        <ProjectList>
-          <h3
-            style={{
-              textDecoration: projSection === 1 ? "underline" : "none",
-              color: projSection === 1 ? "#00adb5" : "inherit",
-            }}
-            onClick={() => scrollToCenter("GiFinder")}
-          >
-            GiFinder
-          </h3>
-          <h3
-            style={{
-              textDecoration: projSection === 2 ? "underline" : "none",
-              color: projSection === 2 ? "#00adb5" : "inherit",
-            }}
-            onClick={() => scrollToCenter("Whoop")}
-          >
-            Whoop
-          </h3>
-          <h3
-            style={{
-              textDecoration: projSection === 3 ? "underline" : "none",
-              color: projSection === 3 ? "#00adb5" : "inherit",
-            }}
-            onClick={() => scrollToCenter("Pokeiron")}
-          >
-            Pokeiron
-          </h3>
-          <h3
-            style={{
-              textDecoration: projSection === 4 ? "underline" : "none",
-              color: projSection === 4 ? "#00adb5" : "inherit",
-            }}
-            onClick={() => scrollToCenter("Viaggiamo")}
-          >
-            Viaggiamo
-          </h3>
-          <h3
-            style={{
-              textDecoration: projSection === 5 ? "underline" : "none",
-              color: projSection === 5 ? "#00adb5" : "inherit",
-            }}
-            onClick={() => scrollToCenter("$ellular")}
-          >
-            Sellular
-          </h3>
-        </ProjectList>
-      </ProjectContainer>
-      <h2
-        style={{
-          textDecoration: section === "RESUME" ? "underline" : "none",
-          color: section === "RESUME" ? "#00adb5" : "inherit",
-        }}
-        onClick={() => scrollToCenter("resume")}
-      >
-        RESUME
-      </h2>
-      <h2
-        style={{
-          textDecoration: section === "CONTACT" ? "underline" : "none",
-          color: section === "CONTACT" ? "#00adb5" : "inherit",
-        }}
-        onClick={() => window.scrollTo(0, document.body.clientHeight)}
-      >
-        CONTACT ME
-      </h2>
+    <Container navOpen={navOpen} visible={visible}>
+      <HamburgerCollapse
+        isActive={navOpen}
+        barColor="#f5f5f5"
+        onClick={() => setNavOpen(!navOpen)}
+      />
+      <NavContainer>{renderNav()}</NavContainer>
     </Container>
   );
 }
 
-export default Header;
-
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   position: fixed;
   right: 0;
-  top: 50%;
-  /* transform: translateY(-50%); */
-  margin-top: -86px;
-  padding: 4px 10px;
+  top: 0;
   z-index: 2;
-  /* background-color: #303640; */
-  background-color: rgba(40, 44, 52, 1);
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
-  font-size: 18px;
+  background-color: ${(p) => (p.navOpen ? "#5090fe" : "none")};
+  width: ${(p) => (p.navOpen ? "calc(100vw - 60px)" : "0")};
+  transform: ${(p) => (p.visible ? "translateX(0)" : "translateX(100%)")};
+  white-space: nowrap;
+  overflow: hidden;
+  transition: 0.6s ease;
+  padding: 30px 0 20px 60px;
+  & button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: auto;
+    outline: none;
+    padding: 10px;
+    background-color: #5090fe;
+    transition: 0.6s ease;
+  }
   & h2 {
-    margin: 0;
-    align-self: flex-end;
-  }
-  & h2:hover {
+    margin: -7px;
+    padding-left: 55%;
+    text-transform: uppercase;
     cursor: pointer;
+    font-family: TitilliumBold;
+    font-size: 32px;
+    transition: 0.6s ease;
+    opacity: ${(p) => (p.navOpen ? "1" : "0")};
   }
-`;
-
-const ProjectContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  :hover {
-    cursor: pointer;
-    & div {
-      height: 164px;
+  @media (min-width: 769px) {
+    top: 50%;
+    width: ${(p) => (p.navOpen ? "200px" : "0")};
+    transform: ${(p) =>
+      p.visible ? "translate(0, -50%)" : "translate(100%, -50%)"};
+    & button {
+      right: auto;
+      left: 0;
+    }
+    & h2 {
+      padding-left: 12px;
     }
   }
 `;
 
-const ProjectList = styled.div`
+const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  border-radius: 0 0 8px 8px;
-  height: 0;
-  overflow: hidden;
-  transition: height 0.3s ease-in-out;
-  & h3 {
-    margin: 0;
-  }
 `;

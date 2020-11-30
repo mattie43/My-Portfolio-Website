@@ -46,8 +46,10 @@ const Container = styled.div`
 `;
 
 const Info = styled.div`
+  /* transform: translateY(100%); */
   text-align: center;
   font-family: Script;
+  font-size: 1rem;
   & p {
     margin: 0;
   }
@@ -66,14 +68,14 @@ const Info = styled.div`
     }
   }
   @media (min-width: 769px) {
-    font-size: 30px;
+    font-size: 2rem;
   }
 `;
 
 const WorkButton = styled.div`
   display: flex;
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   align-items: center;
   font-size: 2rem;
   cursor: pointer;
@@ -92,5 +94,8 @@ const WorkButton = styled.div`
     to {
       transform: translateY(10px);
     }
+  }
+  @media (min-width: 769px) {
+    bottom: 20px;
   }
 `;

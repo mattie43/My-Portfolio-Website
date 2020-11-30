@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  FaGithub,
+  FaCode,
   FaEye,
   FaTimes,
   FaChevronRight,
@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 
 import { ProjectIntro, ProjectList } from "../assests/ProjectList";
+import MyButton from "../assests/MyButton";
 
 export default function Projects() {
   function renderCards() {
@@ -26,8 +27,13 @@ export default function Projects() {
             rel="noreferrer"
             id="github-btn"
           >
-            <FaGithub size={22} />
-            Code
+            <MyButton
+              background={"#00adb5"}
+              hoverBG={"#282c34"}
+              textColor={"#f5f5f5"}
+              content={"Code"}
+              icon={<FaCode size={22} />}
+            />
           </a>
           <a
             href={proj.sourceFront}
@@ -35,8 +41,13 @@ export default function Projects() {
             rel="noreferrer"
             id="video-btn"
           >
-            <FaEye size={22} />
-            Demo
+            <MyButton
+              background={"#9d856c"}
+              hoverBG={"#282c34"}
+              textColor={"#f5f5f5"}
+              content={"Demo"}
+              icon={<FaEye size={22} />}
+            />
           </a>
         </Buttons>
         {i + 1 === ProjectList.length ? null : <hr />}
@@ -77,17 +88,21 @@ const ProjectsContainer = styled.div`
 
 const Intro = styled.p`
   text-align: center;
-  max-width: 60%;
+  max-width: 100%;
   margin: 0;
-  padding: 20px;
+  padding: 10px;
+  @media (min-width: 769px) {
+    max-width: 60%;
+    padding: 20px;
+  }
 `;
 
 const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 65%;
-  padding: 20px;
+  max-width: 100%;
+  padding: 10px;
   & h2 {
     margin: 0 0 20px 0;
     font-family: Script;
@@ -95,78 +110,45 @@ const Card = styled.div`
   & hr {
     margin: 40px 0 0 0;
   }
+  @media (min-width: 769px) {
+    max-width: 65%;
+    padding: 20px;
+  }
 `;
 
 const ProjectInfo = styled.div`
   display: flex;
-  flex-direction: ${(p) => (p.i % 2 === 0 ? "row" : "row-reverse")};
-  text-align: ${(p) => (p.i % 2 === 0 ? "right" : "left")};
+  flex-direction: column;
   align-items: center;
+  text-align: center;
   & img {
-    max-width: 50%;
-    margin: ${(p) => (p.i % 2 === 0 ? "0 20px 0 0" : "0 0 0 20px")};
+    max-width: 95%;
+    margin-bottom: 20px;
+  }
+  @media (min-width: 769px) {
+    & img {
+      max-width: 50%;
+      margin: ${(p) => (p.i % 2 === 0 ? "0 20px 0 0" : "0 0 0 20px")};
+    }
+    flex-direction: ${(p) => (p.i % 2 === 0 ? "row" : "row-reverse")};
+    text-align: ${(p) => (p.i % 2 === 0 ? "right" : "left")};
+    max-width: 65%;
+    padding: 20px;
   }
 `;
 
 const Buttons = styled.div`
   display: flex;
-  width: 30%;
-  justify-content: space-between;
+  width: 100%;
+  justify-content: space-evenly;
   margin-top: 20px;
   & a {
-    font-size: 1.4rem;
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    transition: 300ms ease all;
-    padding: 2px 8px;
   }
-  & #github-btn {
-    position: relative;
-    background: #00adb5;
+  @media (min-width: 769px) {
+    width: 80%;
   }
-  & #video-btn {
-    position: relative;
-    background: #9d856c;
-  }
-  & #github-btn:hover {
-    background: rgba(40, 44, 52, 1);
-    color: #00adb5;
-  }
-  & #video-btn:hover {
-    background: rgba(40, 44, 52, 1);
-    color: #9d856c;
-  }
-  & a:before,
-  a:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 2px;
-    width: 0;
-    transition: 600ms ease all;
-  }
-  & #github-btn:before,
-  #github-btn:after {
-    background: #00adb5;
-  }
-  & #video-btn:before,
-  #video-btn:after {
-    background: #9d856c;
-  }
-  & a:after {
-    right: inherit;
-    top: inherit;
-    left: 0;
-    bottom: 0;
-  }
-  & a:hover:before,
-  a:hover:after {
-    width: 100%;
-    transition: 600ms ease all;
-  }
-  & svg {
-    margin-right: 8px;
+  @media (min-width: 1200px) {
+    width: 60%;
   }
 `;
