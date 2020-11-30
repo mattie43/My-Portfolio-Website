@@ -7,6 +7,7 @@ import {
   FaMediumM,
   FaEnvelope,
 } from "react-icons/fa";
+import { throttle } from "lodash";
 
 const LinksObjs = [
   {
@@ -40,18 +41,7 @@ export default function Links() {
   const [visible, setVisible] = useState(false);
   const iconSize = 38;
 
-  let scrolling = false;
-
-  window.onscroll = () => {
-    scrolling = true;
-  };
-
-  setInterval(() => {
-    if (scrolling) {
-      scrolling = false;
-      checkScroll();
-    }
-  }, 300);
+  window.addEventListener("scroll", throttle(checkScroll, 300));
 
   function checkScroll() {
     const el = document.querySelector("#projects");
@@ -78,7 +68,7 @@ export default function Links() {
     setEmailCopied(true);
     setTimeout(() => {
       setEmailCopied(false);
-    }, 1500);
+    }, 4000);
   }
 
   function renderLinks() {
@@ -140,20 +130,17 @@ const Container = styled.div`
       transform: ${(p) => (p.visible ? "translateX(0)" : "translateX(-100%)")};
     }
   }
-  & a:nth-of-type(1) {
+  & a:nth-of-type(2) {
     transition-delay: 100ms;
   }
-  & a:nth-of-type(2) {
+  & a:nth-of-type(3) {
     transition-delay: 200ms;
   }
-  & a:nth-of-type(3) {
+  & a:nth-of-type(4) {
     transition-delay: 300ms;
   }
-  & a:nth-of-type(4) {
-    transition-delay: 400ms;
-  }
   & a:nth-of-type(5) {
-    transition-delay: 500ms;
+    transition-delay: 400ms;
   }
 `;
 
@@ -164,9 +151,6 @@ const ContactContainer = styled.a`
     color: white;
     font-family: TitilliumBold;
     font-size: 0;
-    @media (min-width: 769px) {
-      font-size: 24px;
-    }
     text-align: center;
     align-self: center;
     white-space: nowrap;
@@ -175,6 +159,9 @@ const ContactContainer = styled.a`
     width: 0;
     overflow: hidden;
     transition: width 0.4s ease;
+    @media (min-width: 769px) {
+      font-size: 24px;
+    }
   }
   & svg {
     padding: 8px;
