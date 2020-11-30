@@ -69,7 +69,7 @@ export default function ContactForm() {
 
 const Container = styled.div`
   display: flex;
-  margin: 20px 0 40px 0;
+  margin-bottom: 100px;
   width: 90%;
   align-self: center;
   @media (min-width: 769px) {

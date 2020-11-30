@@ -8,7 +8,6 @@ import Projects from "./components/Projects";
 import Resume from "./components/Resume";
 import ContactForm from "./components/ContactForm";
 import Links from "./components/Links";
-import galaxy from "./images/purpleGalaxy3.jpg";
 import prism from "./images/prism.png";
 
 function App() {
@@ -18,13 +17,6 @@ function App() {
   window.addEventListener("resize", () => {
     setMobile(window.innerWidth < 769);
   });
-
-  function isMobileSafari() {
-    return (
-      navigator.userAgent.match(/(iPod|iPhone|iPad)/) &&
-      navigator.userAgent.match(/AppleWebKit/)
-    );
-  }
 
   function checkNav(e) {
     if (!e.target.closest(".navbar")) {
@@ -40,10 +32,7 @@ function App() {
   }, []);
 
   return (
-    <Container
-      bgIMG={isMobileSafari() ? null : `url(${galaxy})`}
-      prism={`url(${prism})`}
-    >
+    <Container prism={`url(${prism})`}>
       {mobile ? (
         <MobileNav navBarOpen={navBarOpen} setNavBarOpen={setNavBarOpen} />
       ) : (
@@ -62,27 +51,20 @@ function App() {
 export default App;
 
 const Container = styled.div`
-  color: #d7b377;
-  background-color: #f5f5f5;
-  transition: color 0.5s ease-out;
+  color: #f5f5f5;
+  background-color: #353535;
   min-height: 100vh;
-  max-width: 100%;
+  width: 100%;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
   font-size: 20px;
 
   background-image: ${(p) => p.prism};
-  background-repeat: repeat;
-  background-size: 150vh;
-  background-position-x: center;
+  background-size: 100vh;
 
   @media (min-width: 769px) {
     font-size: 25px;
-    background-image: ${(p) => p.bgIMG};
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
   }
   @media (min-width: 1921px) {
     font-size: 40px;

@@ -4,8 +4,8 @@ import { FaFilePdf, FaFileWord } from "react-icons/fa";
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
 
-import PDF from "../assests/resume.PDF";
-import DOCX from "../assests/resume2.DOCX";
+import PDF from "../assests/Matt_Ericksen_Resume.PDF";
+import DOCX from "../assests/Matt_Ericksen_Resume.DOCX";
 
 export default function Resume() {
   function openFile(bool) {
@@ -46,7 +46,6 @@ export default function Resume() {
 
 const Container = styled.div`
   display: flex;
-  margin: 40px 0;
   width: 90%;
   align-self: center;
   @media (min-width: 769px) {

@@ -13,6 +13,11 @@
   src: url("./App/assests/TitilliumWeb-Black.ttf");
 }
 
+@font-face {
+  font-family: Script;
+  src: url("./App/assests/KaushanScript-Regular.ttf");
+}
+
 html {
   scroll-behavior: smooth;
 }
