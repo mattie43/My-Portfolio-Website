@@ -24,21 +24,21 @@ export default function ResumeContact() {
       setTooltip(false);
     }, 4000);
 
-    // emailjs
-    //   .sendForm(
-    //     "service_59fyl4s",
-    //     "template_ifxjykj",
-    //     document.querySelector("#contact-form"),
-    //     "user_CAQSurlILXzbCdcFAjSgu"
-    //   )
-    //   .then(
-    //     (result) => {
-    //       console.log(result.text);
-    //     },
-    //     (error) => {
-    //       console.log(error.text);
-    //     }
-    //   );
+    emailjs
+      .sendForm(
+        "service_59fyl4s",
+        "template_ifxjykj",
+        document.querySelector("#contact-form"),
+        "user_CAQSurlILXzbCdcFAjSgu"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
 
     setName("");
     setEmail("");

@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  FaCode,
-  FaEye,
-  FaTimes,
-  FaChevronRight,
-  FaChevronLeft,
-} from "react-icons/fa";
+import { FaCode, FaEye } from "react-icons/fa";
 
 import { ProjectIntro, ProjectList } from "../assests/ProjectList";
 import MyButton from "../assests/MyButton";
+import ModalViewer from "./ModalViewer";
+
+const imgs = [
+  "https://i.pinimg.com/originals/86/ff/b8/86ffb87572d657f335cd7cd828c70de3.jpg",
+  "https://wallpaperaccess.com/full/109672.jpg",
+];
 
 export default function Projects() {
+  const [openModal, setOpenModal] = useState(false);
+
   function renderCards() {
     return ProjectList.map((proj, i) => (
       <Card key={i} id={proj.title}>
         <h2>{proj.title}</h2>
         <ProjectInfo i={i}>
-          <img src="https://picsum.photos/1920/1080" alt="" />
-          {proj.desc}
+          <ImgControl onClick={() => setOpenModal(imgs)}>
+            <span>More Images</span>
+            <img src="https://picsum.photos/1920/1080" alt="" />
+          </ImgControl>
+          <p>{proj.desc}</p>
         </ProjectInfo>
         <Buttons>
           <a
@@ -56,12 +61,17 @@ export default function Projects() {
   }
 
   return (
-    <ProjectsContainer id="projects">
-      <h2>Projects</h2>
-      <Intro>{ProjectIntro}</Intro>
-      <hr />
-      {renderCards()}
-    </ProjectsContainer>
+    <>
+      {openModal ? (
+        <ModalViewer imgs={openModal} setOpenModal={setOpenModal} />
+      ) : null}
+      <ProjectsContainer id="projects">
+        <h2>Projects</h2>
+        <Intro>{ProjectIntro}</Intro>
+        <hr />
+        {renderCards()}
+      </ProjectsContainer>
+    </>
   );
 }
 
@@ -111,8 +121,69 @@ const Card = styled.div`
     margin: 40px 0 0 0;
   }
   @media (min-width: 769px) {
-    max-width: 65%;
     padding: 20px;
+  }
+`;
+
+const ImgControl = styled.div`
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  & img {
+    max-width: 95%;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+  & span {
+    position: absolute;
+    color: #f5f5f5;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    transition: opacity ease-out 250ms;
+  }
+  ::before,
+  ::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    top: 1.2rem;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    left: 1.2rem;
+    transition: transform ease-out 250ms;
+  }
+  ::before {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    transform: scale(0, 1);
+  }
+  ::after {
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    transform: scale(1, 0);
+  }
+  :hover {
+    & img {
+      opacity: 0.4;
+    }
+    & span {
+      opacity: 1;
+    }
+    ::before {
+      transform: scale(1.05, 1);
+    }
+    ::after {
+      transform: scale(1, 1.1);
+    }
+  }
+  @media (min-width: 769px) {
+    max-width: 50%;
+    & img {
+      max-width: 100%;
+      margin-bottom: 0;
+    }
   }
 `;
 
@@ -121,19 +192,19 @@ const ProjectInfo = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  & img {
-    max-width: 95%;
-    margin-bottom: 20px;
+  & p {
+    padding: 0;
+    margin: 0;
   }
   @media (min-width: 769px) {
-    & img {
+    & p {
+      margin: ${(p) => (p.i % 2 === 0 ? "0 0 0 20px" : "0 20px 0 0")};
       max-width: 50%;
-      margin: ${(p) => (p.i % 2 === 0 ? "0 20px 0 0" : "0 0 0 20px")};
     }
     flex-direction: ${(p) => (p.i % 2 === 0 ? "row" : "row-reverse")};
     text-align: ${(p) => (p.i % 2 === 0 ? "right" : "left")};
     max-width: 65%;
-    padding: 20px;
+    padding: 20px 0;
   }
 `;
 

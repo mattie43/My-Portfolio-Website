@@ -29,8 +29,10 @@ const Container = styled.div`
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  font-size: 1.3rem;
-
+  font-size: 1.4rem;
+  @media (min-width: 1200px) {
+    font-size: 1.6rem;
+  }
   background-image: ${(p) => p.prism};
   background-size: 100vh;
 `;
