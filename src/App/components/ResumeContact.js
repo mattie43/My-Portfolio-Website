@@ -103,7 +103,7 @@ export default function ResumeContact() {
           background={"#00ab6c"}
           hoverBG={"#282c34"}
           textColor={"#f5f5f5"}
-          content={"Submit"}
+          content={"Send"}
           icon={<FaPaperPlane size={22} />}
         />
       </SubmitContainer>

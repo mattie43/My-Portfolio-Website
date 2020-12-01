@@ -2,6 +2,7 @@ import React, { useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
 import { FaTimes, FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import CrossfadeImage from "react-crossfade-image";
+import { useSwipeable } from "react-swipeable";
 
 export default function ModalViewer(props) {
   const [currentImg, setCurrentImg] = useState(0);
@@ -46,6 +47,13 @@ export default function ModalViewer(props) {
     [props]
   );
 
+  const handleSwipe = useSwipeable({
+    onSwipedLeft: () => changeImage(true),
+    onSwipedRight: () => changeImage(false),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  });
+
   useEffect(() => {
     if (props.imgs) {
       window.addEventListener("keydown", handleKeyDown);
@@ -73,7 +81,7 @@ export default function ModalViewer(props) {
         size={65}
         onClick={() => changeImage(false)}
       />
-      <ImgContainer>
+      <ImgContainer {...handleSwipe}>
         <CrossfadeImage src={props.imgs[currentImg]} alt="" />
       </ImgContainer>
       <FaChevronRight
@@ -111,6 +119,20 @@ const ModalContainer = styled.div`
     right: 0;
   }
   @media (min-width: 769px) {
+    & #modal-left {
+      left: 4%;
+    }
+    & #modal-right {
+      right: 4%;
+    }
+  }
+  @media (min-width: 1200px) {
+    & #modal-left {
+      left: 8%;
+    }
+    & #modal-right {
+      right: 8%;
+    }
   }
 `;
 
