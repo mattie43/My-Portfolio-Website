@@ -58,9 +58,7 @@ export default function Navigation() {
   }
 
   function scrollToID(id) {
-    if (window.matchMedia("(max-width: 769px)").matches) {
-      setNavOpen(false);
-    }
+    setNavOpen(false);
     switch (id) {
       case "about":
         window.scrollTo(0, 0);
