@@ -4,7 +4,7 @@ import { FaCode, FaEye } from "react-icons/fa";
 
 import { ProjectIntro, ProjectList } from "../assests/ProjectList";
 import MyButton from "../assests/MyButton";
-import ModalViewer from "./ModalViewer";
+import ModalView from "./ModalView";
 
 const imgs = [
   "https://i.pinimg.com/originals/86/ff/b8/86ffb87572d657f335cd7cd828c70de3.jpg",
@@ -63,7 +63,7 @@ export default function Projects() {
   return (
     <>
       {openModal ? (
-        <ModalViewer imgs={openModal} setOpenModal={setOpenModal} />
+        <ModalView imgs={openModal} setOpenModal={setOpenModal} />
       ) : null}
       <ProjectsContainer id="projects">
         <h2>Projects</h2>
