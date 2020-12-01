@@ -29,6 +29,14 @@ export default function Navigation() {
 
   window.addEventListener("scroll", throttle(checkVisible, 300));
   window.addEventListener("scroll", throttle(checkSection, 300));
+  window.onclick = (e) => checkClick(e);
+
+  function checkClick(e) {
+    if (e.target.id === "nav-burger" || e.target.closest("#nav-burger")) {
+    } else if (navOpen && e.target.id !== "navigation") {
+      setNavOpen(false);
+    }
+  }
 
   function checkSection() {
     if (sectionVisible("resume")) {
@@ -88,13 +96,14 @@ export default function Navigation() {
   }
 
   return (
-    <Container navOpen={navOpen} visible={visible}>
+    <Container navOpen={navOpen} visible={visible} id="navigation">
       <HamburgerCollapse
         isActive={navOpen}
         barColor="#f5f5f5"
         onClick={() => setNavOpen(!navOpen)}
+        id="nav-burger"
       />
-      <NavContainer>{renderNav()}</NavContainer>
+      <NavContainer navOpen={navOpen}>{renderNav()}</NavContainer>
     </Container>
   );
 }
@@ -105,13 +114,12 @@ const Container = styled.div`
   right: 0;
   top: 0;
   z-index: 2;
-  background-color: ${(p) => (p.navOpen ? "#5090fe" : "none")};
-  width: ${(p) => (p.navOpen ? "calc(100vw - 60px)" : "0")};
+  width: 100vw;
   transform: ${(p) => (p.visible ? "translateX(0)" : "translateX(100%)")};
   white-space: nowrap;
   overflow: hidden;
   transition: 0.6s ease;
-  padding: 30px 0 20px 60px;
+  padding: 15px 0 15px 0;
   & button {
     position: absolute;
     top: 0;
@@ -124,7 +132,7 @@ const Container = styled.div`
   }
   & h2 {
     margin: -7px;
-    padding-left: 55%;
+    /* transform: translateX(95%); */
     text-transform: uppercase;
     cursor: pointer;
     font-family: TitilliumBold;
@@ -150,4 +158,7 @@ const Container = styled.div`
 const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
+  transition: 0.6s ease;
+  transform: ${(p) => (p.navOpen ? "translateX(0)" : "translateX(100%)")};
+  background-color: ${(p) => (p.navOpen ? "#5090fe" : "none")};
 `;
