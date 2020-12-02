@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { FaFilePdf, FaFileWord, FaPaperPlane } from "react-icons/fa";
 import emailjs from "emailjs-com";
 
-import PDF from "../assests/Matt_Ericksen_Resume.PDF";
-import DOCX from "../assests/Matt_Ericksen_Resume.DOCX";
-import MyButton from "../assests/MyButton";
+import PDF from "../assests/resumes/Matt_Ericksen_Resume.PDF";
+import DOCX from "../assests/resumes/Matt_Ericksen_Resume.DOCX";
+import MyButton from "./MyButton";
 
 export default function ResumeContact() {
   const [name, setName] = useState("");

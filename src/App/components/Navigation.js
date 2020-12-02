@@ -5,19 +5,19 @@ import { throttle } from "lodash";
 
 const NavigationObjs = [
   {
-    name: "About Me",
+    name: "ABOUT ME",
     id: "about",
   },
   {
-    name: "Projects",
+    name: "PROJECTS",
     id: "projects",
   },
   {
-    name: "Resume /",
+    name: "RESUME /",
     id: "resume",
   },
   {
-    name: "Contact",
+    name: "CONTACT",
     id: "resume",
   },
 ];
@@ -82,28 +82,27 @@ export default function Navigation() {
 
   function renderNav() {
     return NavigationObjs.map((obj, i) => (
-      <div key={i}>
-        <h2
-          onClick={() => scrollToID(obj.id)}
-          style={{
-            color: section === obj.id ? "#282c34" : "#f5f5f5",
-          }}
-        >
-          {obj.name}
-        </h2>
-      </div>
+      <h2
+        key={i}
+        onClick={() => scrollToID(obj.id)}
+        style={{
+          color: section === obj.id ? "#282c34" : "#f5f5f5",
+        }}
+      >
+        {obj.name}
+      </h2>
     ));
   }
 
   return (
     <Container navOpen={navOpen} visible={visible} id="navigation">
+      <NavContainer navOpen={navOpen}>{renderNav()}</NavContainer>
       <HamburgerCollapse
         isActive={navOpen}
         barColor="#f5f5f5"
         onClick={() => setNavOpen(!navOpen)}
         id="nav-burger"
       />
-      <NavContainer navOpen={navOpen}>{renderNav()}</NavContainer>
     </Container>
   );
 }
@@ -111,54 +110,52 @@ export default function Navigation() {
 const Container = styled.div`
   display: flex;
   position: fixed;
-  right: 0;
-  top: 0;
-  z-index: 2;
-  width: 100vw;
-  transform: ${(p) => (p.visible ? "translateX(0)" : "translateX(100%)")};
-  white-space: nowrap;
-  overflow: hidden;
-  transition: 0.6s ease;
-  padding: 15px 0 15px 0;
+  z-index: 3;
+  width: 100%;
   & button {
+    background: #5090fe;
+    transition: transform 0.7s ease;
+    transform: ${(p) => (p.visible ? "translateX(0)" : "translateX(100%)")};
+    outline: none;
+    margin: 0;
+    padding: 6px 10px;
     position: absolute;
     top: 0;
     right: 0;
-    left: auto;
-    outline: none;
-    padding: 10px;
-    background-color: #5090fe;
-    transition: 0.6s ease;
-  }
-  & h2 {
-    margin: -7px;
-    /* transform: translateX(95%); */
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: TitilliumBold;
-    font-size: 32px;
-    transition: 0.6s ease;
-    opacity: ${(p) => (p.navOpen ? "1" : "0")};
+    & div {
+      margin-bottom: -3px;
+    }
   }
   @media (min-width: 769px) {
+    width: auto;
+    right: 0;
     top: 50%;
-    width: ${(p) => (p.navOpen ? "200px" : "0")};
+    transition: transform 0.7s ease;
     transform: ${(p) =>
-      p.visible ? "translate(0, -50%)" : "translate(100%, -50%)"};
-    & button {
-      right: auto;
-      left: 0;
-    }
-    & h2 {
-      padding-left: 12px;
-    }
+      p.navOpen ? "translate(0, -50%)" : "translate(0, -50%)"};
   }
 `;
 
 const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
-  transition: 0.6s ease;
-  transform: ${(p) => (p.navOpen ? "translateX(0)" : "translateX(100%)")};
-  background-color: ${(p) => (p.navOpen ? "#5090fe" : "none")};
+  width: 100%;
+  padding: 10px 0;
+  transition: 0.7s ease;
+  background: ${(p) => (p.navOpen ? "#5090fe" : "transparent")};
+  transform: ${(p) => (p.navOpen ? "translateY(0)" : "translateY(-100%)")};
+  & h2 {
+    align-self: center;
+    margin: -5px;
+    transition: opacity 0.7s ease;
+    opacity: ${(p) => (p.navOpen ? "1" : "0")};
+  }
+  @media (min-width: 769px) {
+    transform: ${(p) => (p.navOpen ? "translateX(0)" : "translateX(100%)")};
+    & h2 {
+      align-self: auto;
+      font-size: 2rem;
+      padding: 0 68px 0 20px;
+    }
+  }
 `;

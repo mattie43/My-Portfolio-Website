@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaCode, FaEye } from "react-icons/fa";
 
-import { ProjectIntro, ProjectList } from "../assests/ProjectList";
-import MyButton from "../assests/MyButton";
+import { ProjectIntro, ProjectList } from "../assests/JS/ProjectList";
+import MyButton from "./MyButton";
 import ModalView from "./ModalView";
-
-const imgs = [
-  "https://i.pinimg.com/originals/86/ff/b8/86ffb87572d657f335cd7cd828c70de3.jpg",
-  "https://wallpaperaccess.com/full/109672.jpg",
-];
 
 export default function Projects() {
   const [openModal, setOpenModal] = useState(false);
@@ -19,42 +14,48 @@ export default function Projects() {
       <Card key={i} id={proj.title}>
         <h2>{proj.title}</h2>
         <ProjectInfo i={i}>
-          <ImgControl onClick={() => setOpenModal(imgs)}>
+          <ImgControl
+            onClick={() => setOpenModal(proj.imgs)}
+            square={proj.title === "$ellular"}
+          >
+            <img src={proj.imgs[0]} alt="" />
             <span>More Images</span>
-            <img src="https://picsum.photos/1920/1080" alt="" />
           </ImgControl>
           <p>{proj.desc}</p>
         </ProjectInfo>
-        <Buttons>
-          <a
-            href={proj.sourceFront}
-            target="_blank"
-            rel="noreferrer"
-            id="github-btn"
-          >
+        <ButtonContainer>
+          <a href={proj.sourceFront} target="_blank" rel="noreferrer">
             <MyButton
               background={"#00adb5"}
               hoverBG={"#282c34"}
               textColor={"#f5f5f5"}
-              content={"Code"}
+              content={proj.sourceBack ? "Code (FE)" : "Code"}
               icon={<FaCode size={22} />}
             />
           </a>
-          <a
-            href={proj.sourceFront}
-            target="_blank"
-            rel="noreferrer"
-            id="video-btn"
-          >
-            <MyButton
-              background={"#9d856c"}
-              hoverBG={"#282c34"}
-              textColor={"#f5f5f5"}
-              content={"Demo"}
-              icon={<FaEye size={22} />}
-            />
-          </a>
-        </Buttons>
+          {proj.sourceBack ? (
+            <a href={proj.sourceBack} target="_blank" rel="noreferrer">
+              <MyButton
+                background={"#ff6e5e"}
+                hoverBG={"#282c34"}
+                textColor={"#f5f5f5"}
+                content={"Code (BE)"}
+                icon={<FaCode size={22} />}
+              />
+            </a>
+          ) : null}
+          {proj.video ? (
+            <a href={proj.video} target="_blank" rel="noreferrer">
+              <MyButton
+                background={"#9d856c"}
+                hoverBG={"#282c34"}
+                textColor={"#f5f5f5"}
+                content={"Demo"}
+                icon={<FaEye size={22} />}
+              />
+            </a>
+          ) : null}
+        </ButtonContainer>
         {i + 1 === ProjectList.length ? null : <hr />}
       </Card>
     ));
@@ -148,10 +149,10 @@ const ImgControl = styled.div`
     content: "";
     position: absolute;
     z-index: 1;
-    top: 1.2rem;
-    right: 1.2rem;
-    bottom: 1.2rem;
-    left: 1.2rem;
+    top: 1.3rem;
+    right: 1.3rem;
+    bottom: 1.3rem;
+    left: 1.3rem;
     transition: transform ease-out 250ms;
   }
   ::before {
@@ -175,7 +176,7 @@ const ImgControl = styled.div`
       transform: scale(1.05, 1);
     }
     ::after {
-      transform: scale(1, 1.1);
+      transform: ${(p) => (p.square ? "scale(1, 1.05)" : "scale(1, 1.09)")};
     }
   }
   @media (min-width: 769px) {
@@ -208,18 +209,22 @@ const ProjectInfo = styled.div`
   }
 `;
 
-const Buttons = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
-  width: 100%;
+  flex-direction: column;
   justify-content: space-evenly;
   margin-top: 20px;
   & a {
+    margin-bottom: 6px;
     text-decoration: none;
+    align-self: center;
   }
   @media (min-width: 769px) {
+    flex-direction: row;
     width: 80%;
   }
   @media (min-width: 1200px) {
+    flex-direction: row;
     width: 60%;
   }
 `;
