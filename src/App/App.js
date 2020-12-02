@@ -1,38 +1,18 @@
-import styled from "styled-components";
+import React from "react";
+import { Route, BrowserRouter } from "react-router-dom";
+import { RouteTransitionProvider } from "react-route-transition";
 
 import AboutMe from "./components/AboutMe";
-import Navigation from "./components/Navigation";
-import Projects from "./components/Projects";
-import ResumeContact from "./components/ResumeContact";
-import Links from "./components/Links";
-import prism from "./assests/images/prism.png";
+import Home from "./components/Home";
 
-function App() {
+export default function App() {
   return (
-    <Container prism={`url(${prism})`}>
-      <Navigation />
-      <Links />
-      <AboutMe />
-      <Projects />
-      <ResumeContact />
-    </Container>
+    <BrowserRouter>
+      {/* <RouteTransitionProvider> */}
+
+      <Route path="/about" component={AboutMe} />
+      <Route path="/" component={Home} />
+      {/* </RouteTransitionProvider> */}
+    </BrowserRouter>
   );
 }
-
-export default App;
-
-const Container = styled.div`
-  color: #f5f5f5;
-  background-color: #353535;
-  min-height: 100vh;
-  width: 100%;
-  overflow-x: hidden;
-  display: flex;
-  flex-direction: column;
-  font-size: 1.4rem;
-  @media (min-width: 1200px) {
-    font-size: 1.6rem;
-  }
-  background-image: ${(p) => p.prism};
-  background-size: 100vh;
-`;
