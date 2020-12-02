@@ -5,7 +5,7 @@ import Navigation from "./components/Navigation";
 import Projects from "./components/Projects";
 import ResumeContact from "./components/ResumeContact";
 import Links from "./components/Links";
-import prism from "./images/prism.png";
+import prism from "./assests/images/prism.png";
 
 function App() {
   return (

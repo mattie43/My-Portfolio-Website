@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FaMinus, FaChevronDown } from "react-icons/fa";
 
-import tempHS from "../images/tempHS.png";
+import tempHS from "../assests/images/tempHS.png";
 
 export default function AboutMe() {
   function scrollToWork() {

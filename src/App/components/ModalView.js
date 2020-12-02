@@ -91,7 +91,15 @@ const Container = styled.div`
   height: 100vh;
   width: 100%;
   & #img-div {
-    max-width: 70%;
+    max-width: 95%;
+  }
+  .carousel .slide img {
+    max-height: 90vh;
+  }
+  @media (min-width: 769px) {
+    & #img-div {
+      max-width: 75%;
+    }
   }
 `;
 
