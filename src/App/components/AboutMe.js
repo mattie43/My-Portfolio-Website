@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FaMinus, FaChevronDown } from "react-icons/fa";
 
 import tempHS from "../assests/images/tempHS.png";
+import flower from "../assests/images/moroccan-flower-dark.png";
 
 export default function AboutMe() {
   function scrollToWork() {
@@ -10,7 +11,7 @@ export default function AboutMe() {
   }
 
   return (
-    <Container img={`url(${tempHS})`}>
+    <Container img={`url(${flower})`}>
       <Info>
         <p>Hey, I'm</p>
         <div>
@@ -80,7 +81,7 @@ const WorkButton = styled.div`
   font-size: 2rem;
   cursor: pointer;
   :hover {
-    color: #00adb5;
+    color: #eb9509;
     transition: 0.4s ease;
   }
   & svg {

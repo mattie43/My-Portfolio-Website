@@ -130,9 +130,7 @@ const Container = styled.div`
     width: auto;
     right: 0;
     top: 50%;
-    transition: transform 0.7s ease;
-    transform: ${(p) =>
-      p.navOpen ? "translate(0, -50%)" : "translate(0, -50%)"};
+    transform: translateY(-50%);
   }
 `;
 
