@@ -24,12 +24,12 @@ export default function AboutMe() {
           <FaMinus size={30} />
         </div>
       </Info>
-      <Link to="/about">
+      {/* <Link to="/about">
         <AboutMeButton>
           About Me
           <FaChevronRight size={35} />
         </AboutMeButton>
-      </Link>
+      </Link> */}
       <WorkButton onClick={scrollToWork}>
         <FaChevronDown size={35} />
         My Work

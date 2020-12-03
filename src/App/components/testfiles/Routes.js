@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, withRouter } from "react-router-dom";
 import { AnimatedSwitch } from "./AnimatedSwitch";
-import { Lorem } from "./Lorem";
 
 /**
  * The ".page" class is key to animating a full page and not receive bumps while
@@ -13,13 +12,11 @@ import { Lorem } from "./Lorem";
 const PageOne = () => (
   <div className="page pink">
     <h1>Hello PageOne</h1>
-    <Lorem />
   </div>
 );
 const PageTwo = () => (
   <div className="page green">
     <h1>Hello PageTwo</h1>
-    <Lorem />
   </div>
 );
 
