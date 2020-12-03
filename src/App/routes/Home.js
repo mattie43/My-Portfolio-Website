@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import IntroImage from "./IntroImage";
-import Navigation from "./Navigation";
-import Projects from "./Projects";
-import ResumeContact from "./ResumeContact";
-import Links from "./Links";
+import IntroImage from "../components/IntroImage";
+import Navigation from "../components/Navigation";
+import Projects from "../components/Projects";
+import ResumeContact from "../components/ResumeContact";
+import Links from "../components/Links";
 import prism from "../assests/images/prism.png";
 
 export default function Home() {

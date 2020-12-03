@@ -130,10 +130,12 @@ const ImgControl = styled.div`
   display: flex;
   position: relative;
   cursor: pointer;
+  overflow: hidden;
   & img {
     max-width: 95%;
     margin: auto;
     margin-bottom: 10px;
+    transition: transform ease-out 0.8s;
   }
   & span {
     position: absolute;
@@ -168,6 +170,7 @@ const ImgControl = styled.div`
   :hover {
     & img {
       opacity: 0.4;
+      transform: scale(1.05);
     }
     & span {
       opacity: 1;

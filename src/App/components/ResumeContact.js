@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { FaFilePdf, FaFileWord, FaPaperPlane } from "react-icons/fa";
 import emailjs from "emailjs-com";
 
-import PDF from "../assests/resumes/Matt_Ericksen_Resume.PDF";
-import DOCX from "../assests/resumes/Matt_Ericksen_Resume.DOCX";
+import PDF from "../assests/resumes/Matt_Ericksen_Resume.pdf";
+import DOCX from "../assests/resumes/Matt_Ericksen_Resume.docx";
 import MyButton from "./MyButton";
 
 export default function ResumeContact() {

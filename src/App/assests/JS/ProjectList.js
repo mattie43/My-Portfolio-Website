@@ -71,8 +71,7 @@ export const ProjectList = [
     title: "My Portfolio",
     desc:
       "Yes, this very website! Built with React and designed to be mobile first.",
-    imgs:
-      "https://images.idgesg.net/images/article/2019/07/chrome-screenshot-2-100801438-large.jpg",
+    imgs: SS.PortfolioSS,
     sourceFront: "https://github.com/mattie43/mywebsite",
   },
 ];
