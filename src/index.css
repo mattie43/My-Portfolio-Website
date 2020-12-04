@@ -33,7 +33,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-.transform-none {
-  transform: none !important;
-}
