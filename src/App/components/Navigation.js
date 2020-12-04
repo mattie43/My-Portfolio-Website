@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { HamburgerCollapse } from "react-animated-burgers";
 import { throttle } from "lodash";
@@ -27,13 +27,21 @@ export default function Navigation() {
   const [navOpen, setNavOpen] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  setTimeout(() => {
-    window.addEventListener("scroll", throttle(checkVisible, 300));
-    window.addEventListener("scroll", throttle(checkSection, 300));
-    window.onclick = (e) => checkClick(e);
-  }, 700);
+  useEffect(() => {
+    const throttleNav = throttle(checkNavVisible, 300);
+    const throttleSection = throttle(checkSection, 300);
+    window.addEventListener("scroll", throttleNav);
+    window.addEventListener("scroll", throttleSection);
+    window.addEventListener("click", checkClick);
+    return () => {
+      window.removeEventListener("scroll", throttleNav);
+      window.addEventListener("scroll", throttleSection);
+      window.removeEventListener("click", checkClick);
+    };
+  });
 
   function checkClick(e) {
+    console.log("clicked");
     if (e.target.id === "nav-burger" || e.target.closest("#nav-burger")) {
     } else if (navOpen && e.target.id !== "navigation") {
       setNavOpen(false);
@@ -54,7 +62,7 @@ export default function Navigation() {
     }
   }
 
-  function checkVisible() {
+  function checkNavVisible() {
     const el = document.querySelector("#projects");
     if (!visible && el.getBoundingClientRect().top < window.innerHeight / 2) {
       setVisible(true);

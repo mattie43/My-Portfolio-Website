@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   FaGithub,
@@ -41,11 +41,15 @@ export default function Links() {
   const [visible, setVisible] = useState(false);
   const iconSize = 38;
 
-  setTimeout(() => {
-    window.addEventListener("scroll", throttle(checkScroll, 300));
-  }, 700);
+  useEffect(() => {
+    const scrollThrottle = throttle(checkLinksVisible, 300);
+    window.addEventListener("scroll", scrollThrottle);
 
-  function checkScroll() {
+    // window.addEventListener("scroll", checkLinksVisible);
+    return () => window.removeEventListener("scroll", scrollThrottle);
+  });
+
+  function checkLinksVisible() {
     const el = document.querySelector("#projects");
     if (!visible && el.getBoundingClientRect().top < window.innerHeight / 2) {
       setVisible(true);
