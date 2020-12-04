@@ -75,7 +75,7 @@ export default function Navigation() {
         document.getElementById("projects").scrollIntoView();
         break;
       default:
-        window.scrollTo(0, document.body.scrollHeight);
+        document.getElementById("resume").scrollIntoView();
         break;
     }
   }
@@ -109,6 +109,7 @@ export default function Navigation() {
 
 const Container = styled.div`
   display: flex;
+  pointer-events: ${(p) => (p.visible ? "all" : "none")};
   position: fixed;
   z-index: 3;
   width: 100%;
@@ -147,6 +148,7 @@ const NavContainer = styled.div`
     margin: -5px;
     transition: opacity 0.7s ease;
     opacity: ${(p) => (p.navOpen ? "1" : "0")};
+    cursor: pointer;
   }
   @media (min-width: 769px) {
     transform: ${(p) => (p.navOpen ? "translateX(0)" : "translateX(100%)")};

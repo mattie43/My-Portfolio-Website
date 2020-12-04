@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { FaMinus, FaChevronDown, FaChevronRight } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import tempHS from "../assests/images/tempHS.png";
 import flower from "../assests/images/moroccan-flower-dark.png";
 
 export default function AboutMe() {
@@ -24,12 +23,12 @@ export default function AboutMe() {
           <FaMinus size={30} />
         </div>
       </Info>
-      {/* <Link to="/about">
+      <NavLink to="/about">
         <AboutMeButton>
           About Me
           <FaChevronRight size={35} />
         </AboutMeButton>
-      </Link> */}
+      </NavLink>
       <WorkButton onClick={scrollToWork}>
         <FaChevronDown size={35} />
         My Work
