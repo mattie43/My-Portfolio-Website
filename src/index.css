@@ -27,12 +27,13 @@ body {
   font-family: Titillium;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url("./App/assests/images/prism.png");
-  background-size: 100vh;
-  overflow-x: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.transform-none {
+  transform: none !important;
 }

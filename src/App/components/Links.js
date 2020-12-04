@@ -41,7 +41,9 @@ export default function Links() {
   const [visible, setVisible] = useState(false);
   const iconSize = 38;
 
-  window.addEventListener("scroll", throttle(checkScroll, 300));
+  setTimeout(() => {
+    window.addEventListener("scroll", throttle(checkScroll, 300));
+  }, 700);
 
   function checkScroll() {
     const el = document.querySelector("#projects");

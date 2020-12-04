@@ -27,9 +27,11 @@ export default function Navigation() {
   const [navOpen, setNavOpen] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  window.addEventListener("scroll", throttle(checkVisible, 300));
-  window.addEventListener("scroll", throttle(checkSection, 300));
-  window.onclick = (e) => checkClick(e);
+  setTimeout(() => {
+    window.addEventListener("scroll", throttle(checkVisible, 300));
+    window.addEventListener("scroll", throttle(checkSection, 300));
+    window.onclick = (e) => checkClick(e);
+  }, 700);
 
   function checkClick(e) {
     if (e.target.id === "nav-burger" || e.target.closest("#nav-burger")) {
