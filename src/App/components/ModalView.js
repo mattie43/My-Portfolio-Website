@@ -24,6 +24,7 @@ export default function ModalView(props) {
   );
 
   useEffect(() => {
+    document.querySelector(".carousel-root").focus();
     if (props.imgs) {
       window.addEventListener("keydown", handleKeyDown);
       window.addEventListener("click", handleClick);
@@ -45,6 +46,7 @@ export default function ModalView(props) {
     swipeable: true,
     emulateTouch: true,
     infiniteLoop: true,
+    useKeyboardArrows: true,
     renderArrowPrev: (onClickHandler, hasPrev, label) =>
       hasPrev && (
         <ModalButton type="button" onClick={onClickHandler} title={label}>
@@ -86,7 +88,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   position: fixed;
-  z-index: 3;
+  z-index: 10;
   background-color: rgba(40, 44, 52, 0.5);
   height: 100vh;
   width: 100%;
@@ -125,6 +127,7 @@ const ModalButton = styled.button`
     transform: translateY(-50%);
     left: 0;
     transition: background 0.3s ease;
+    background: rgba(0, 0, 0, 0.1);
   }
   :hover {
     ::before {

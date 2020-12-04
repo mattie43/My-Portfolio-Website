@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FaCode, FaEye } from "react-icons/fa";
+import { safari } from "is_js";
 
 import { ProjectIntro, ProjectList } from "../assests/JS/ProjectList";
 import MyButton from "./MyButton";
@@ -17,6 +18,7 @@ export default function Projects() {
           <ImgControl
             onClick={() => setOpenModal(proj.imgs)}
             square={proj.title === "$ellular"}
+            className={safari() ? "safari" : "non-safari"}
           >
             <img src={proj.imgs[0]} alt="" />
             <span>More Images</span>
@@ -133,7 +135,8 @@ const ImgControl = styled.div`
   overflow: hidden;
   & img {
     max-width: 95%;
-    margin: auto;
+    margin: 0 auto;
+    align-self: center;
     margin-bottom: 10px;
     transition: transform ease-out 0.8s;
   }
@@ -186,7 +189,6 @@ const ImgControl = styled.div`
     max-width: 50%;
     & img {
       max-width: 100%;
-      margin-bottom: 0;
     }
   }
 `;

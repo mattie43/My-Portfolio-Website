@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { HamburgerCollapse } from "react-animated-burgers";
 import { throttle } from "lodash";
+import { useHistory } from "react-router-dom";
 
 const NavigationObjs = [
   {
@@ -26,6 +27,7 @@ export default function Navigation() {
   const [section, setSection] = useState("about");
   const [navOpen, setNavOpen] = useState(false);
   const [visible, setVisible] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const throttleNav = throttle(checkNavVisible, 300);
@@ -78,7 +80,8 @@ export default function Navigation() {
     setNavOpen(false);
     switch (id) {
       case "about":
-        window.scrollTo(0, 0);
+        history.push("/about");
+        // window.scrollTo(0, 0);
         break;
       case "projects":
         document.getElementById("projects").scrollIntoView();
