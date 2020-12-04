@@ -89,7 +89,7 @@ const WorkButton = styled.div`
   font-size: 2rem;
   cursor: pointer;
   :hover {
-    color: #eb9509;
+    color: #e0913e;
     transition: 0.4s ease;
   }
   & svg {
@@ -118,7 +118,7 @@ const AboutMeButton = styled.div`
   font-size: 2rem;
   cursor: pointer;
   :hover {
-    color: #eb9509;
+    color: #e0913e;
     transition: 0.4s ease;
   }
   & svg {
