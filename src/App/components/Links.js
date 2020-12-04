@@ -44,8 +44,6 @@ export default function Links() {
   useEffect(() => {
     const scrollThrottle = throttle(checkLinksVisible, 300);
     window.addEventListener("scroll", scrollThrottle);
-
-    // window.addEventListener("scroll", checkLinksVisible);
     return () => window.removeEventListener("scroll", scrollThrottle);
   });
 

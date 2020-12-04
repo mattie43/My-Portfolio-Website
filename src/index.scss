@@ -1,0 +1,132 @@
+@font-face {
+  font-family: Titillium;
+  src: url("./App/assests/fonts/TitilliumWeb-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: TitilliumBold;
+  src: url("./App/assests/fonts/TitilliumWeb-Bold.ttf");
+}
+
+@font-face {
+  font-family: TitilliumBlack;
+  src: url("./App/assests/fonts/TitilliumWeb-Black.ttf");
+}
+
+@font-face {
+  font-family: Script;
+  src: url("./App/assests/fonts/KaushanScript-Regular.ttf");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Titillium;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #353535;
+  background-image: url("./App/assests/images/prism.png");
+  background-size: 100vh;
+  overflow-x: hidden;
+  color: #f5f5f5;
+  font-size: 1.4rem;
+  @media (min-width: 1200px) {
+    font-size: 1.6rem;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* home effects */
+
+.home.slide-enter {
+  transform: scale(0.96) translateX(-120vw);
+  position: absolute;
+}
+.home.slide-enter-active {
+  animation: home-enter 4s ease;
+}
+.home.slide-exit {
+  position: absolute;
+}
+.home.slide-exit-active {
+  animation: home-leave 4s ease;
+}
+@keyframes home-leave {
+  12.5% {
+    transform: scale(0.96, 0.99) translateX(0);
+  }
+  25% {
+    transform: scale(0.96, 0.99) translateX(0);
+  }
+  50% {
+    transform: scale(0.96, 0.99) translateX(-120vw);
+  }
+  100% {
+    transform: scale(0.96, 0.99) translateX(-120vw);
+  }
+}
+@keyframes home-enter {
+  0% {
+    transform: scale(0.96, 0.99) translateX(-120vw);
+  }
+  50% {
+    transform: scale(0.96, 0.99) translateX(-120vw);
+  }
+  75% {
+    transform: scale(0.96, 0.99) translateX(0);
+  }
+  100% {
+    transform: scale(1) translateX(0);
+  }
+}
+
+/* about me effects */
+
+.about-me.slide-enter {
+  transform: scale(0.96) translateX(120vw);
+  position: absolute;
+}
+.about-me.slide-enter-active {
+  animation: about-me-enter 4s ease;
+}
+.about-me.slide-exit {
+  position: absolute;
+}
+.about-me.slide-exit-active {
+  animation: about-me-leave 4s ease;
+}
+@keyframes about-me-leave {
+  12.5% {
+    transform: scale(0.96);
+  }
+  25% {
+    transform: scale(0.96);
+  }
+  50% {
+    transform: scale(0.96) translateX(120vw);
+  }
+  100% {
+    transform: scale(0.96) translateX(120vw);
+  }
+}
+@keyframes about-me-enter {
+  0% {
+    transform: scale(0.96) translateX(120vw);
+  }
+  50% {
+    transform: scale(0.96) translateX(120vw);
+  }
+  75% {
+    transform: scale(0.96) translateX(0);
+  }
+  100% {
+    transform: scale(1) translateX(0);
+  }
+}

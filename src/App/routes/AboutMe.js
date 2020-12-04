@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 export default function AboutMe() {
   return (
-    <Container>
+    <Container className="about-me">
       <NavLink to="/">testing router</NavLink>
     </Container>
   );
