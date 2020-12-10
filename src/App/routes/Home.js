@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import IntroImage from "../components/IntroImage";
@@ -8,13 +8,25 @@ import ResumeContact from "../components/ResumeContact";
 import Links from "../components/Links";
 
 export default function Home() {
+  const [visible, setVisible] = useState(false);
+  const [stopAnimation, setStopAnimation] = useState(false);
+
   return (
     <Container className="home">
-      <IntroImage />
+      <IntroImage
+        visible={visible}
+        stopAnimation={stopAnimation}
+        setStopAnimation={setStopAnimation}
+      />
       <Projects />
       <ResumeContact />
-      <Navigation />
-      <Links />
+      <Navigation
+        visible={visible}
+        setVisible={setVisible}
+        stopAnimation={stopAnimation}
+        setStopAnimation={setStopAnimation}
+      />
+      <Links visible={visible} setVisible={setVisible} />
     </Container>
   );
 }

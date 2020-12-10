@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FaCode, FaEye } from "react-icons/fa";
-import { safari } from "is_js";
 
-import { ProjectIntro, ProjectList } from "../assests/JS/ProjectList";
+import { ProjectIntro, ProjectList } from "../assets/JS/ProjectList";
 import MyButton from "./MyButton";
 import ModalView from "./ModalView";
 
@@ -18,7 +17,6 @@ export default function Projects() {
           <ImgControl
             onClick={() => setOpenModal(proj.imgs)}
             square={proj.title === "$ellular"}
-            className={safari() ? "safari" : "non-safari"}
           >
             <img src={proj.imgs[0]} alt="" />
             <span>More Images</span>
@@ -86,6 +84,7 @@ const ProjectsContainer = styled.div`
   align-items: center;
   padding: 20px 0;
   margin-bottom: 200px;
+  z-index: 1;
   & a {
     color: inherit;
   }
@@ -96,6 +95,7 @@ const ProjectsContainer = styled.div`
   & h2 {
     margin: 0;
     font-family: Script;
+    letter-spacing: 1px;
   }
 `;
 

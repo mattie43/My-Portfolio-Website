@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import AboutMe from "./routes/AboutMe";
 import Home from "./routes/Home";
+import AboutMe from "./routes/AboutMe";
 
 export default function App() {
   const location = useLocation();
