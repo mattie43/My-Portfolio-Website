@@ -23,10 +23,9 @@ const NavigationObjs = [
   },
 ];
 
-export default function Navigation() {
+export default function Navigation(props) {
   const [section, setSection] = useState("about");
   const [navOpen, setNavOpen] = useState(false);
-  const [visible, setVisible] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -44,13 +43,16 @@ export default function Navigation() {
 
   function checkNavVisible() {
     const el = document.querySelector("#projects");
-    if (!visible && el.getBoundingClientRect().top < window.innerHeight / 2) {
-      setVisible(true);
+    if (
+      !props.visible &&
+      el.getBoundingClientRect().top < window.innerHeight / 2
+    ) {
+      props.setVisible(true);
     } else if (
-      visible &&
+      props.visible &&
       el.getBoundingClientRect().top > window.innerHeight / 2
     ) {
-      setVisible(false);
+      props.setVisible(false);
       setNavOpen(false);
     }
   }
@@ -80,7 +82,14 @@ export default function Navigation() {
     setNavOpen(false);
     switch (id) {
       case "about":
-        history.push("/about");
+        props.setVisible(false);
+        props.setStopAnimation(true);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 2200);
+        setTimeout(() => {
+          history.push("/about");
+        }, 750);
         // window.scrollTo(0, 0);
         break;
       case "projects":
@@ -107,7 +116,7 @@ export default function Navigation() {
   }
 
   return (
-    <Container navOpen={navOpen} visible={visible} id="navigation">
+    <Container navOpen={navOpen} visible={props.visible} id="navigation">
       <NavContainer navOpen={navOpen}>{renderNav()}</NavContainer>
       <HamburgerCollapse
         isActive={navOpen}
@@ -128,7 +137,7 @@ const Container = styled.div`
   & button {
     background: #5090fe;
     transition: transform 0.7s ease;
-    transform: ${(p) => (p.visible ? "translateX(0)" : "translateX(100%)")};
+    transform: ${(p) => (p.visible ? "translateX(0)" : "translateX(105%)")};
     outline: none;
     margin: 0;
     padding: 6px 10px;

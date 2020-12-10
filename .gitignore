@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# emailJS API keys
+/src/App/components/EmailJS.js

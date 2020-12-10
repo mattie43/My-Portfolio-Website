@@ -1,55 +1,111 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaMinus, FaChevronDown, FaChevronRight } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { throttle } from "lodash";
 
-import flower from "../assests/images/moroccan-flower-dark.png";
+import TextCanvas from "../components/TextCanvas";
+import prism from "../assets/images/prism.png";
 
-export default function AboutMe() {
+export default function IntroImage(props) {
+  const [hideContent, setHideContent] = useState(false);
+  const [mobile, setMobile] = useState(window.innerWidth < 769);
+  const history = useHistory();
+
+  window.addEventListener("resize", () => {
+    setMobile(window.innerWidth < 769);
+  });
+
+  useEffect(() => {
+    const throttleHideContent = throttle(checkHideContent, 300);
+    window.addEventListener("scroll", throttleHideContent);
+    return () => {
+      window.removeEventListener("scroll", throttleHideContent);
+    };
+  });
+
   function scrollToWork() {
     document.getElementById("projects").scrollIntoView();
   }
 
+  function goToAbout() {
+    props.setStopAnimation(true);
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 2000);
+    history.push("/about");
+  }
+
+  function checkHideContent() {
+    const el = document.querySelector("#Whoop");
+    if (
+      !hideContent &&
+      el.getBoundingClientRect().top < window.innerHeight / 2
+    ) {
+      setHideContent(true);
+    } else if (
+      hideContent &&
+      el.getBoundingClientRect().top > window.innerHeight / 2
+    ) {
+      setHideContent(false);
+    }
+  }
+
   return (
-    <Container img={`url(${flower})`}>
-      <Info>
-        <p>Hey, I'm</p>
-        <div>
-          <FaMinus size={30} />
-          <span>
-            Matt <br />
-            Ericksen
-          </span>
-          <FaMinus size={30} />
-        </div>
-      </Info>
-      <NavLink to="/about">
-        <AboutMeButton>
-          About Me
-          <FaChevronRight size={35} />
-        </AboutMeButton>
-      </NavLink>
-      <WorkButton onClick={scrollToWork}>
-        <FaChevronDown size={35} />
-        My Work
-      </WorkButton>
-    </Container>
+    <>
+      <TopDiv />
+      <Container prism={prism}>
+        {hideContent ? null : (
+          <>
+            <Info>
+              <p>Hey, I'm</p>
+              {mobile ? (
+                <div>
+                  <FaMinus size={20} />
+                  <span>
+                    Matt <br />
+                    Ericksen
+                  </span>
+                  <FaMinus size={20} />
+                </div>
+              ) : (
+                <TextCanvas
+                  stopAnimation={props.stopAnimation}
+                  mobile={mobile}
+                />
+              )}
+            </Info>
+            <AboutMeButton onClick={goToAbout}>
+              About Me
+              <FaChevronRight size={35} />
+            </AboutMeButton>
+            <WorkButton onClick={scrollToWork}>
+              <FaChevronDown size={35} />
+              My Work
+            </WorkButton>
+          </>
+        )}
+      </Container>
+    </>
   );
 }
+
+const TopDiv = styled.div`
+  height: 100vh;
+  width: 100%;
+`;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: fixed;
   height: 100vh;
   width: 100%;
-  background-image: ${(p) => p.img};
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-image: ${(p) => `url(${p.prism})`};
+  background-size: 100vh;
   justify-content: center;
   align-items: center;
   margin-bottom: 200px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
   & a {
     color: inherit;
   }
@@ -58,38 +114,58 @@ const Container = styled.div`
 const Info = styled.div`
   text-align: center;
   font-family: Script;
-  font-size: 1rem;
+  font-size: 2rem;
   & p {
     margin: 0;
+  }
+  & canvas {
+    margin-bottom: 52px;
   }
   & div {
     display: flex;
     align-items: center;
     & span {
-      font-size: 3em;
+      font-size: 4rem;
       font-weight: bold;
-      margin: 20px 40px;
+      margin: 20px;
       line-height: 1.2;
-      letter-spacing: 0.35rem;
+      letter-spacing: 0.3rem;
     }
     & svg {
       transform: scaleX(2);
     }
   }
   @media (min-width: 769px) {
-    font-size: 2rem;
+    font-size: 3.5rem;
+    & p {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  @media (min-height: 1200px) {
+    & canvas {
+      margin-bottom: -400px;
+    }
+  }
+  @media (min-height: 2000px) {
+    & canvas {
+      margin-bottom: -800px;
+    }
   }
 `;
 
 const WorkButton = styled.div`
   display: flex;
   position: absolute;
-  bottom: 40px;
+  bottom: 10px;
+  left: 5px;
   align-items: center;
   font-size: 2rem;
   cursor: pointer;
   :hover {
-    color: #e0913e;
+    color: #00adb5;
     transition: 0.4s ease;
   }
   & svg {
@@ -106,19 +182,21 @@ const WorkButton = styled.div`
   }
   @media (min-width: 769px) {
     bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `;
 
 const AboutMeButton = styled.div`
   display: flex;
   position: absolute;
-  bottom: 40px;
-  right: 20px;
+  bottom: 10px;
+  right: 5px;
   align-items: center;
   font-size: 2rem;
   cursor: pointer;
   :hover {
-    color: #e0913e;
+    color: #00adb5;
     transition: 0.4s ease;
   }
   & svg {
@@ -134,5 +212,6 @@ const AboutMeButton = styled.div`
   }
   @media (min-width: 769px) {
     bottom: 20px;
+    right: 20px;
   }
 `;

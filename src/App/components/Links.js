@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   FaGithub,
@@ -7,7 +7,6 @@ import {
   FaMediumM,
   FaEnvelope,
 } from "react-icons/fa";
-import { throttle } from "lodash";
 
 const LinksObjs = [
   {
@@ -18,7 +17,7 @@ const LinksObjs = [
   },
   {
     name: "LinkedIn",
-    link: "https://www.linkedin.com/in/matt-ericksen-4195ab1b1/",
+    link: "https://www.linkedin.com/in/matt-ericksen/",
     bgColor: "#2d72ba",
     icon: FaLinkedinIn,
   },
@@ -36,28 +35,9 @@ const LinksObjs = [
   },
 ];
 
-export default function Links() {
+export default function Links(props) {
   const [emailCopied, setEmailCopied] = useState(false);
-  const [visible, setVisible] = useState(false);
   const iconSize = 38;
-
-  useEffect(() => {
-    const scrollThrottle = throttle(checkLinksVisible, 300);
-    window.addEventListener("scroll", scrollThrottle);
-    return () => window.removeEventListener("scroll", scrollThrottle);
-  });
-
-  function checkLinksVisible() {
-    const el = document.querySelector("#projects");
-    if (!visible && el.getBoundingClientRect().top < window.innerHeight / 2) {
-      setVisible(true);
-    } else if (
-      visible &&
-      el.getBoundingClientRect().top > window.innerHeight / 2
-    ) {
-      setVisible(false);
-    }
-  }
 
   function copyEmail() {
     // navigator.clipboard.writeText("email");
@@ -94,7 +74,7 @@ export default function Links() {
   }
 
   return (
-    <Container visible={visible}>
+    <Container visible={props.visible}>
       {renderLinks()}
       <CopiedBox copied={emailCopied}>E-mail copied!</CopiedBox>
       <ContactContainer onClick={copyEmail}>
@@ -115,6 +95,7 @@ const Container = styled.div`
   display: flex;
   position: fixed;
   z-index: 2;
+  pointer-events: ${(p) => (p.visible ? "all" : "none")};
   @media (max-width: 768px) {
     bottom: 0;
     left: 50%;

@@ -1,21 +1,21 @@
 @font-face {
   font-family: Titillium;
-  src: url("./App/assests/fonts/TitilliumWeb-SemiBold.ttf");
+  src: url("./App/assets/fonts/TitilliumWeb-SemiBold.ttf");
 }
 
 @font-face {
   font-family: TitilliumBold;
-  src: url("./App/assests/fonts/TitilliumWeb-Bold.ttf");
+  src: url("./App/assets/fonts/TitilliumWeb-Bold.ttf");
 }
 
 @font-face {
   font-family: TitilliumBlack;
-  src: url("./App/assests/fonts/TitilliumWeb-Black.ttf");
+  src: url("./App/assets/fonts/TitilliumWeb-Black.ttf");
 }
 
 @font-face {
   font-family: Script;
-  src: url("./App/assests/fonts/KaushanScript-Regular.ttf");
+  src: url("./App/assets/fonts/KaushanScript-Regular.ttf");
 }
 
 html {
@@ -27,8 +27,7 @@ body {
   font-family: Titillium;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #353535;
-  background-image: url("./App/assests/images/prism.png");
+  background-color: #313131;
   background-size: 100vh;
   overflow-x: hidden;
   color: #f5f5f5;
@@ -41,6 +40,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+#load-font {
+  font-family: Script;
 }
 
 /* home effects */
@@ -56,10 +59,9 @@ code {
 .home.slide-exit {
   width: auto;
   position: absolute;
-  z-index: -1;
 }
 .home.slide-exit-active {
-  animation: home-leave 4s ease;
+  animation: home-leave 4s ease forwards;
 }
 @keyframes home-enter {
   0% {
@@ -103,16 +105,20 @@ code {
 .about-me.slide-enter {
   transform: translateX(100vw);
   position: absolute;
-  left: 0;
-  right: 0;
+  width: auto;
 }
 .about-me.slide-enter-active {
   animation: about-me-enter 4s ease;
+  & #inner-even {
+    animation: late-enter-even 1s ease 4s forwards;
+  }
+  & #inner-odd {
+    animation: late-enter-odd 1s ease 4s forwards;
+  }
 }
 .about-me.slide-exit {
   position: absolute;
-  left: 0;
-  right: 0;
+  width: auto;
 }
 .about-me.slide-exit-active {
   animation: about-me-leave 4s ease;
@@ -151,5 +157,23 @@ code {
   100% {
     transform: translateX(100vw);
     margin: 50px;
+  }
+}
+@keyframes late-enter-even {
+  from {
+    transform: translateX(-110%);
+  }
+  to {
+    transform: translateX(0);
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 1);
+  }
+}
+@keyframes late-enter-odd {
+  from {
+    transform: translateX(110%);
+  }
+  to {
+    transform: translateX(0);
+    box-shadow: 0 0px 20px rgba(0, 0, 0, 1);
   }
 }

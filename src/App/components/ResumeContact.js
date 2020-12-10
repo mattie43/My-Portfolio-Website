@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FaFilePdf, FaFileWord, FaPaperPlane } from "react-icons/fa";
-import emailjs from "emailjs-com";
 
-import PDF from "../assests/resumes/Matt_Ericksen_Resume.pdf";
-import DOCX from "../assests/resumes/Matt_Ericksen_Resume.docx";
+import { EmailJS } from "./EmailJS";
+import PDF from "../assets/resumes/Matt_Ericksen_Resume.pdf";
+import DOCX from "../assets/resumes/Matt_Ericksen_Resume.docx";
 import MyButton from "./MyButton";
 
 export default function ResumeContact() {
@@ -23,23 +23,7 @@ export default function ResumeContact() {
     setTimeout(() => {
       setTooltip(false);
     }, 4000);
-
-    emailjs
-      .sendForm(
-        "service_59fyl4s",
-        "template_ifxjykj",
-        document.querySelector("#contact-form"),
-        "user_CAQSurlILXzbCdcFAjSgu"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-
+    EmailJS();
     setName("");
     setEmail("");
     setMessage("");
@@ -119,6 +103,7 @@ const Container = styled.div`
   align-items: center;
   padding: 20px 0;
   margin-bottom: 100px;
+  z-index: 1;
   & hr {
     width: 70%;
     margin: 25px 0;
@@ -129,6 +114,7 @@ const Container = styled.div`
   & h2 {
     margin: 0;
     font-family: Script;
+    letter-spacing: 1px;
   }
 `;
 
