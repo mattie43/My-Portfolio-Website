@@ -3,9 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { NavLink } from "react-router-dom";
 
 import prism from "../assets/images/prism.png";
-import DG from "../assets/images/dg.webp";
-import Blue from "../assets/images/moroccan-flower-dark.png";
-import Purple from "../assets/images/purpleGalaxy.jpg";
+import { AB } from "../assets/JS/Me";
 
 export default function AboutMe() {
   const slideCheck = useRef();
@@ -17,28 +15,23 @@ export default function AboutMe() {
   });
 
   function aboutMeDivs() {
-    return [DG, Blue, Purple].map((img, i) => (
+    return AB.map((obj, i) => (
       <AboutMeDiv
         key={i}
         even={i % 2 === 0}
-        bgImg={img}
+        bgImg={obj.img}
         id={i % 2 === 0 ? "inner-even" : "inner-odd"}
         slideCheck={slideCheck.current}
       >
-        <p>
-          Culpa excepteur ea aliquip eu. Incididunt consequat consectetur dolor
-          qui fugiat consequat eiusmod ex aliqua mollit commodo Lorem aliqua.
-          Fugiat ad dolore eiusmod dolore fugiat. Adipisicing labore tempor sunt
-          reprehenderit culpa aute cupidatat sit est. Ex pariatur incididunt
-          cillum qui esse ad ipsum Lorem nostrud ea aliquip elit ullamco. Elit
-          nisi quis consectetur elit minim aute. Ad ea enim fugiat mollit.
-        </p>
+        <p>{obj.p}</p>
       </AboutMeDiv>
     ));
   }
   return (
     <Container className="about-me" prism={prism}>
-      <NavLink to="/">testing router</NavLink>
+      <Header>
+        <NavLink to="/">Head Back</NavLink>
+      </Header>
       {aboutMeDivs()}
     </Container>
   );
@@ -59,10 +52,19 @@ const Container = styled.div`
   }
 `;
 
+const Header = styled.div`
+  width: 100%;
+  background-color: #212121;
+  & a {
+    color: inherit;
+    text-decoration: none;
+  }
+`;
+
 const AboutMeDiv = styled.div`
   display: flex;
-  margin: 20px 0;
-  min-height: 70vh;
+  min-height: 50vh;
+  width: 100%;
   align-items: center;
   background-image: ${(p) => `url(${p.bgImg})`};
   background-repeat: no-repeat;
@@ -73,8 +75,11 @@ const AboutMeDiv = styled.div`
   animation: ${(p) => enter(p.even)} 1s ease
     ${(p) => (p.slideCheck ? "4s" : "0s")} forwards;
   & p {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
     margin: 0;
-    padding: 15px;
+    font-size: 32px;
+    padding: 0 15vw;
   }
 `;
 
@@ -84,6 +89,6 @@ const enter = (p) => keyframes`
   }
   to {
     transform : translateX(0);
-    box-shadow: 0 0px 20px rgba(0, 0, 0, 1);
+    /* box-shadow: 0 0px 20px rgba(0, 0, 0, 1); */
   }
 `;

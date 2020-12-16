@@ -144,6 +144,14 @@ const Info = styled.div`
       transform: translateX(-50%);
     }
   }
+  @media (max-height: 800px) {
+    & p {
+      top: 12%;
+    }
+    & canvas {
+      margin-bottom: 252px;
+    }
+  }
   @media (min-height: 1200px) {
     & canvas {
       margin-bottom: -400px;

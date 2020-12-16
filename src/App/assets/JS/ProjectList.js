@@ -20,8 +20,7 @@ export const ProjectList = [
       "The first project I have ever created was a CLI app written in Ruby. This app allows you to search Giphy through the Giphy API and save gifs in the categories of your choosing. Categories and gifs are saved to your account, so you can always go back and view them again.",
     imgs: SS.GiFinderSS,
     sourceFront: "https://github.com/mattie43/Mod1-FinalProject-GiFinder",
-    video:
-      "https://www.youtube.com/watch?v=2ka9ZnbwsMY&ab_channel=MattEricksen",
+    video: "https://youtu.be/gZTGQi95ey8",
     live: "https://github.com/mattie43/Mod1-FinalProject-GiFinder",
   },
   {
@@ -30,8 +29,7 @@ export const ProjectList = [
       "My second project was my first website written in Ruby, using the Ruby on Rails framework. We decided to remake Yelp. Allowing users to search, rate, and comment on restaurants using the Yelp API.",
     imgs: SS.WhoopSS,
     sourceFront: "https://github.com/mattie43/Mod2FinalProject/",
-    video:
-      "https://www.youtube.com/watch?v=UDK8yE9uqO4&ab_channel=MattEricksen",
+    video: "https://youtu.be/UGfoMf0srmA",
     live: "https://github.com/mattie43/Mod2FinalProject/",
   },
   {
@@ -41,8 +39,7 @@ export const ProjectList = [
     imgs: SS.PokeironSS,
     sourceFront: "https://github.com/mattie43/Mod3PokemonProject-FrontEnd/",
     sourceBack: "https://github.com/islommashanlo/Mod3-Pokemon-Project-Backend",
-    video:
-      "https://www.youtube.com/watch?v=jrzZztLCQtU&ab_channel=MattEricksen",
+    video: "https://youtu.be/E9EmkBUMi2U",
     live: "https://github.com/mattie43/Mod3PokemonProject-FrontEnd/",
   },
   {
@@ -52,8 +49,7 @@ export const ProjectList = [
     imgs: SS.ViaggiamoSS,
     sourceFront: "https://github.com/slurio/slurio-viaggiamo-frontend-",
     sourceBack: "https://github.com/mattie43/Viaggiamo-Backend",
-    video:
-      "https://www.youtube.com/watch?v=x-GsXlZ09G8&ab_channel=MattEricksen",
+    video: "https://youtu.be/67z3DLLl6o8",
     live: "https://github.com/slurio/slurio-viaggiamo-frontend-",
   },
   {
@@ -63,8 +59,7 @@ export const ProjectList = [
     imgs: SS.SellularSS,
     sourceFront: "https://github.com/mattie43/Sellular-Frontend",
     sourceBack: "https://github.com/mattie43/Sellular-Backend",
-    video:
-      "https://www.youtube.com/watch?v=nb9qzIs44CI&ab_channel=MattEricksen",
+    video: "https://youtu.be/NwAFpeAaf1I",
     live: "https://github.com/mattie43/Sellular-Backend",
   },
   {
