@@ -36,6 +36,9 @@ import Sellular10 from "../images/screenshots/sellular (10).jpg";
 import Portfolio1 from "../images/screenshots/portfolio (1).jpg";
 import Portfolio2 from "../images/screenshots/portfolio (2).jpg";
 import Portfolio3 from "../images/screenshots/portfolio (3).jpg";
+import Portfolio4 from "../images/screenshots/portfolio (4).jpg";
+import Portfolio5 from "../images/screenshots/portfolio (5).jpg";
+import Portfolio6 from "../images/screenshots/portfolio (6).jpg";
 
 export const GiFinderSS = [
   GiFinder1,
@@ -74,4 +77,11 @@ export const SellularSS = [
   Sellular9,
   Sellular10,
 ];
-export const PortfolioSS = [Portfolio1, Portfolio2, Portfolio3];
+export const PortfolioSS = [
+  Portfolio1,
+  Portfolio2,
+  Portfolio3,
+  Portfolio4,
+  Portfolio5,
+  Portfolio6,
+];
