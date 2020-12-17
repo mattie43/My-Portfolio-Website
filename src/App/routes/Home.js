@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
+import AboutMe from "../components/AboutMe";
 import IntroImage from "../components/IntroImage";
 import Navigation from "../components/Navigation";
 import Projects from "../components/Projects";
@@ -10,6 +11,7 @@ import Links from "../components/Links";
 export default function Home() {
   const [visible, setVisible] = useState(false);
   const [stopAnimation, setStopAnimation] = useState(false);
+  const [aboutMeOpen, setAboutMeOpen] = useState(false);
 
   return (
     <Container className="home">
@@ -18,6 +20,7 @@ export default function Home() {
         stopAnimation={stopAnimation}
         setStopAnimation={setStopAnimation}
       />
+      <AboutMe aboutMeOpen={aboutMeOpen} setAboutMeOpen={setAboutMeOpen} />
       <Projects />
       <ResumeContact />
       <Navigation
@@ -25,6 +28,7 @@ export default function Home() {
         setVisible={setVisible}
         stopAnimation={stopAnimation}
         setStopAnimation={setStopAnimation}
+        setAboutMeOpen={setAboutMeOpen}
       />
       <Links visible={visible} setVisible={setVisible} />
     </Container>

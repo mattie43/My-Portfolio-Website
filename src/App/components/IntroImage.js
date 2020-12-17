@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { FaMinus, FaChevronDown, FaChevronRight } from "react-icons/fa";
-import { useHistory } from "react-router-dom";
+import { FaMinus, FaChevronDown } from "react-icons/fa";
 import { throttle } from "lodash";
 
 import TextCanvas from "../components/TextCanvas";
@@ -10,10 +9,15 @@ import prism from "../assets/images/prism.png";
 export default function IntroImage(props) {
   const [hideContent, setHideContent] = useState(false);
   const [mobile, setMobile] = useState(window.innerWidth < 769);
-  const history = useHistory();
 
   window.addEventListener("resize", () => {
-    setMobile(window.innerWidth < 769);
+    if (window.innerWidth < 769) {
+      setMobile(true);
+      props.setStopAnimation(true);
+    } else {
+      setMobile(false);
+      props.setStopAnimation(false);
+    }
   });
 
   useEffect(() => {
@@ -26,14 +30,6 @@ export default function IntroImage(props) {
 
   function scrollToWork() {
     document.getElementById("projects").scrollIntoView();
-  }
-
-  function goToAbout() {
-    props.setStopAnimation(true);
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 2000);
-    history.push("/about");
   }
 
   function checkHideContent() {
@@ -75,10 +71,6 @@ export default function IntroImage(props) {
                 />
               )}
             </Info>
-            <AboutMeButton onClick={goToAbout}>
-              About Me
-              <FaChevronRight size={35} />
-            </AboutMeButton>
             <WorkButton onClick={scrollToWork}>
               <FaChevronDown size={35} />
               My Work
@@ -168,7 +160,8 @@ const WorkButton = styled.div`
   display: flex;
   position: absolute;
   bottom: 10px;
-  left: 5px;
+  left: 50%;
+  transform: translateX(-50%);
   align-items: center;
   font-size: 2rem;
   cursor: pointer;
@@ -190,36 +183,5 @@ const WorkButton = styled.div`
   }
   @media (min-width: 769px) {
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-`;
-
-const AboutMeButton = styled.div`
-  display: flex;
-  position: absolute;
-  bottom: 10px;
-  right: 5px;
-  align-items: center;
-  font-size: 2rem;
-  cursor: pointer;
-  :hover {
-    color: #00adb5;
-    transition: 0.4s ease;
-  }
-  & svg {
-    animation: slide 0.6s infinite alternate ease;
-  }
-  @keyframes slide {
-    from {
-      transform: translateX(0px);
-    }
-    to {
-      transform: translateX(10px);
-    }
-  }
-  @media (min-width: 769px) {
-    bottom: 20px;
-    right: 20px;
   }
 `;
