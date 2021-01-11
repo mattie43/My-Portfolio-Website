@@ -43,7 +43,7 @@ export default function Links(props) {
     // navigator.clipboard.writeText("email");
 
     const textField = document.createElement("textarea");
-    textField.innerText = "matt@mattericksen.com";
+    textField.innerText = "mattericksen93@gmail.com";
     document.body.appendChild(textField);
     textField.select();
     document.execCommand("copy");
